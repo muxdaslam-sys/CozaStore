@@ -1,0 +1,334 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.Master.cs" Inherits="Ecom_Project.Admin.Site1" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CozaStore Admin — Manage your fashion store">
+    <title>CozaStore — Admin Panel</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../Images/icons/favicon.png" />
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <!-- Bootstrap Grid only (layout utility) -->
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css" />
+
+    <!-- Admin Dashboard CSS -->
+    <link rel="stylesheet" href="../css/admin-dashboard.css" />
+
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+<form id="form1" runat="server">
+
+    <!-- Mobile Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="wrapper">
+
+        <!-- ════════════════ SIDEBAR ════════════════ -->
+        <nav id="sidebar">
+
+            <!-- Logo Brand -->
+            <div class="sidebar-brand">
+                <img src="../Images/icons/logo-01.png" alt="CozaStore Logo" class="logo-img" />
+                <span class="brand-badge">Admin</span>
+            </div>
+
+            <!-- Navigation -->
+            <div class="sidebar-nav">
+
+                <div class="sidebar-label">Main Menu</div>
+                <ul>
+                    <li id="nav-dashboard">
+                        <a href="Admin_HomePage.aspx">
+                            <span class="nav-icon si-purple"><i class="fa-solid fa-gauge-high"></i></span>
+                            <span class="nav-label">Dashboard</span>
+                        </a>
+                    </li>
+                    <li id="nav-category">
+                        <a href="Category.aspx">
+                            <span class="nav-icon si-orange"><i class="fa-solid fa-layer-group"></i></span>
+                            <span class="nav-label">Categories</span>
+                        </a>
+                    </li>
+                    <li id="nav-product">
+                        <a href="Product.aspx">
+                            <span class="nav-icon si-green"><i class="fa-solid fa-bag-shopping"></i></span>
+                            <span class="nav-label">Products</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="sidebar-label" style="margin-top:8px;">Management</div>
+                <ul>
+                    <li id="nav-add-category">
+                        <a href="Add_Category.aspx">
+                            <span class="nav-icon si-orange"><i class="fa-solid fa-folder-plus"></i></span>
+                            <span class="nav-label">Add Category</span>
+                        </a>
+                    </li>
+                    <li id="nav-add-product">
+                        <a href="Add_Product.aspx">
+                            <span class="nav-icon si-green"><i class="fa-solid fa-circle-plus"></i></span>
+                            <span class="nav-label">Add Product</span>
+                        </a>
+                    </li>
+                    <li id="nav-add-admin">
+                        <a href="Add_Admin.aspx">
+                            <span class="nav-icon si-purple"><i class="fa-solid fa-user-plus"></i></span>
+                            <span class="nav-label">Add Admin</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Admin Pill Footer -->
+            <div class="sidebar-footer">
+                <div class="admin-pill">
+                    <div class="av">AD</div>
+                    <div class="av-info">
+                        <div class="av-name">Administrator</div>
+                        <div class="av-role">Super Admin</div>
+                    </div>
+                    <i class="fa-solid fa-circle-check" style="color:#16a34a;font-size:14px;flex-shrink:0;"></i>
+                </div>
+            </div>
+        </nav>
+        <!-- ════════════════ /SIDEBAR ════════════════ -->
+
+        <!-- ════════════════ CONTENT ════════════════ -->
+        <div id="content">
+
+            <!-- Top Navbar -->
+            <header class="top-navbar">
+                <div class="navbar-left">
+                    <button type="button" class="toggle-btn" id="sidebarToggle" aria-label="Toggle Sidebar">
+                        <i class="fa-solid fa-bars-staggered"></i>
+                    </button>
+                    <span class="page-name" id="dynamicPageName">Dashboard</span>
+                </div>
+
+                <div class="navbar-right">
+
+                    <!-- Search shortcut -->
+                    <button type="button" class="nav-icon-btn" title="Search" aria-label="Search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+
+                    <!-- Notifications -->
+                    <button type="button" class="nav-icon-btn" title="Notifications" aria-label="Notifications">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="notif-dot"></span>
+                    </button>
+
+                    <!-- Visit Store -->
+                    <a href="../Index.aspx" target="_blank" class="nav-icon-btn" title="Visit Store" aria-label="Visit Store">
+                        <i class="fa-solid fa-store"></i>
+                    </a>
+
+                    <!-- Profile Dropdown -->
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <div class="profile-trigger" id="profileTrigger">
+                            <div class="p-avatar">AD</div>
+                            <div class="p-name-wrap">
+                                <asp:Label ID="lblAdminName" runat="server" Text="Administrator" ClientIDMode="Static" CssClass="p-name"></asp:Label>
+                                <span class="p-role">Super Admin</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-down p-caret"></i>
+                        </div>
+
+                        <div class="profile-menu">
+                            <div class="pm-head">
+                                <span class="pm-n">Administrator</span>
+                                <span class="pm-r">Super Admin</span>
+                            </div>
+                            <ul class="pm-items">
+                                <li>
+                                    <a href="Add_Admin.aspx">
+                                        <i class="fa-solid fa-user-plus"></i> Add Admin
+                                    </a>
+                                </li>
+                                <li class="pm-divider"></li>
+                                <li>
+                                    <asp:LinkButton ID="lnkLogout" runat="server" CssClass="logout-btn">
+                                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                                    </asp:LinkButton>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="main-container">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </main>
+
+        </div>
+        <!-- ════════════════ /CONTENT ════════════════ -->
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+    (function () {
+        /* ── Sidebar Toggle ───────────────────── */
+        var sidebar = document.getElementById('sidebar');
+        var overlay = document.getElementById('sidebarOverlay');
+        var toggle  = document.getElementById('sidebarToggle');
+        var content = document.getElementById('content');
+
+        function isMobile() { return window.innerWidth <= 991; }
+
+        toggle.addEventListener('click', function () {
+            if (isMobile()) {
+                sidebar.classList.toggle('mobile-open');
+                overlay.classList.toggle('show');
+            } else {
+                sidebar.classList.toggle('collapsed');
+                content.classList.toggle('expanded');
+            }
+        });
+        overlay.addEventListener('click', function () {
+            sidebar.classList.remove('mobile-open');
+            overlay.classList.remove('show');
+        });
+        window.addEventListener('resize', function () {
+            if (!isMobile()) {
+                sidebar.classList.remove('mobile-open');
+                overlay.classList.remove('show');
+            }
+        });
+
+        /* ── Profile Dropdown ─────────────────── */
+        var pd = document.getElementById('profileDropdown');
+        document.getElementById('profileTrigger').addEventListener('click', function (e) {
+            e.stopPropagation();
+            pd.classList.toggle('open');
+        });
+        document.addEventListener('click', function (e) {
+            if (!pd.contains(e.target)) pd.classList.remove('open');
+        });
+
+        /* ── Auto Active Sidebar Link ─────────── */
+        var path = window.location.pathname.split('/').pop().toLowerCase();
+
+        var navMap = {
+            'admin_homepage.aspx' : 'nav-dashboard',
+            'category.aspx'       : 'nav-category',
+            'product.aspx'        : 'nav-product',
+            'add_category.aspx'   : 'nav-add-category',
+            'add_product.aspx'    : 'nav-add-product',
+            'add_admin.aspx'      : 'nav-add-admin'
+        };
+        var nameMap = {
+            'admin_homepage.aspx' : 'Dashboard',
+            'category.aspx'       : 'Categories',
+            'product.aspx'        : 'Products',
+            'add_category.aspx'   : 'Add Category',
+            'add_product.aspx'    : 'Add Product',
+            'add_admin.aspx'      : 'Add Admin'
+        };
+
+        if (navMap[path]) {
+            var li = document.getElementById(navMap[path]);
+            if (li) li.classList.add('active');
+        }
+        var nameEl = document.getElementById('dynamicPageName');
+        if (nameEl && nameMap[path]) nameEl.textContent = nameMap[path];
+
+    })();
+    </script>
+
+    <!-- ════ TOAST NOTIFICATION ENGINE ════ -->
+    <div class="toast-container" id="adminToastContainer"></div>
+
+    <script type="text/javascript">
+    (function () {
+        /**
+         * showAdminToast(title, message, type, duration)
+         *  type     : 'success' | 'error' | 'info'
+         *  duration : ms before auto-dismiss (default 4000)
+         */
+        window.showAdminToast = function (title, message, type, duration) {
+            type     = type     || 'success';
+            duration = duration || 4000;
+
+            var iconMap = {
+                success : '<i class="fa-solid fa-circle-check"></i>',
+                error   : '<i class="fa-solid fa-circle-xmark"></i>',
+                info    : '<i class="fa-solid fa-circle-info"></i>'
+            };
+
+            var container = document.getElementById('adminToastContainer');
+            var toast = document.createElement('div');
+            toast.className = 'admin-toast toast-' + type;
+
+            toast.innerHTML =
+                '<div class="toast-icon">' + (iconMap[type] || iconMap.info) + '</div>' +
+                '<div class="toast-body">' +
+                    '<div class="toast-title">' + title + '</div>' +
+                    '<div class="toast-message">' + message + '</div>' +
+                '</div>' +
+                '<button class="toast-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>' +
+                '<div class="toast-progress"></div>';
+
+            container.appendChild(toast);
+
+            /* Trigger slide-in on next frame */
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    toast.classList.add('toast-show');
+                });
+            });
+
+            /* Close button */
+            toast.querySelector('.toast-close').addEventListener('click', function () {
+                dismissToast(toast);
+            });
+
+            /* Auto-dismiss */
+            var timer = setTimeout(function () { dismissToast(toast); }, duration);
+
+            /* Pause progress on hover */
+            toast.addEventListener('mouseenter', function () {
+                clearTimeout(timer);
+                var bar = toast.querySelector('.toast-progress');
+                if (bar) bar.style.animationPlayState = 'paused';
+            });
+            toast.addEventListener('mouseleave', function () {
+                var bar = toast.querySelector('.toast-progress');
+                if (bar) bar.style.animationPlayState = 'running';
+                timer = setTimeout(function () { dismissToast(toast); }, 1500);
+            });
+
+            function dismissToast(el) {
+                el.classList.remove('toast-show');
+                el.classList.add('toast-hide');
+                el.addEventListener('transitionend', function () {
+                    if (el.parentNode) el.parentNode.removeChild(el);
+                }, { once: true });
+            }
+        };
+    })();
+    </script>
+
+</form>
+</body>
+</html>
