@@ -464,6 +464,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DB-Backup\" />
+    <Folder Include="Images\category\" />
+    <Folder Include="Images\products\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

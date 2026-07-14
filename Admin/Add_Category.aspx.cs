@@ -23,7 +23,8 @@ namespace Ecom_Project.Admin
 
             if (Category_image.HasFile)
             {
-                path = "~/images/" + Category_image.FileName;
+                // Save category image under the specific category subfolder
+                path = "~/Images/" + Category_image.FileName;
                 Category_image.SaveAs(Server.MapPath(path));
             }
 
@@ -35,20 +36,23 @@ namespace Ecom_Project.Admin
             cmd.Parameters.AddWithValue("@cimage", path);
             cmd.Parameters.AddWithValue("@cdis", Category_discription.Text);
             cmd.Parameters.AddWithValue("@cstatus", "Available");
+            
             int i = ob.SP_nonquery(cmd);
             if (i != 0)
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "toast",
-                    "showAdminToast('Category Created!','The category has been added successfully.','success');", true);
-                // Clear form
+                // Register a script that displays the success toast, and then redirects after 1.5 seconds
+                string script = "showAdminToast('Category Created!', 'The category has been added successfully.', 'success'); " +
+                                "setTimeout(function() { window.location.href = 'Category.aspx'; }, 1500);";
+                ScriptManager.RegisterStartupScript(this, GetType(), "toast", script, true);
+                
+                // Clear form inputs
                 Category_name.Text = "";
                 Category_discription.Text = "";
-                Response.Redirect("Category.aspx");
             }
             else
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "toast",
-                    "showAdminToast('Failed to Add','Something went wrong. Please try again.','error');", true);
+                    "showAdminToast('Failed to Add', 'Something went wrong. Please try again.', 'error');", true);
             }
         }
     }
