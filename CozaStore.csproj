@@ -74,6 +74,7 @@
     <Content Include="Admin\Add_Admin.aspx" />
     <Content Include="Admin\Admin_HomePage.aspx" />
     <Content Include="Admin\Category.aspx" />
+    <Content Include="Admin\Edit_Category.aspx" />
     <Content Include="Admin\Product.aspx" />
     <Content Include="blog-detail.html" />
     <Content Include="blog.html" />
@@ -304,6 +305,13 @@
     </Compile>
     <Compile Include="Admin\Category.aspx.designer.cs">
       <DependentUpon>Category.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Edit_Category.aspx.cs">
+      <DependentUpon>Edit_Category.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Edit_Category.aspx.designer.cs">
+      <DependentUpon>Edit_Category.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Product.aspx.cs">
       <DependentUpon>Product.aspx</DependentUpon>

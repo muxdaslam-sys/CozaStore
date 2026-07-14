@@ -253,6 +253,26 @@
         var nameEl = document.getElementById('dynamicPageName');
         if (nameEl && nameMap[path]) nameEl.textContent = nameMap[path];
 
+        /* ── File Upload Name Display ──────────────── */
+        document.addEventListener('change', function (e) {
+            if (e.target && e.target.type === 'file') {
+                var wrap = e.target.closest('.file-upload-wrap');
+                if (wrap) {
+                    var uploadText = wrap.querySelector('.upload-text');
+                    if (uploadText) {
+                        if (!wrap.hasAttribute('data-default-html')) {
+                            wrap.setAttribute('data-default-html', uploadText.innerHTML);
+                        }
+                        if (e.target.files && e.target.files.length > 0) {
+                            uploadText.innerHTML = '<strong>Selected:</strong> ' + e.target.files[0].name;
+                        } else {
+                            uploadText.innerHTML = wrap.getAttribute('data-default-html');
+                        }
+                    }
+                }
+            }
+        });
+
     })();
     </script>
 

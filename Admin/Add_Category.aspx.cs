@@ -30,7 +30,7 @@ namespace Ecom_Project.Admin
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "SP_Category";
-
+            cmd.Parameters.AddWithValue("@Action", 1);
             cmd.Parameters.AddWithValue("@cname", Category_name.Text);
             cmd.Parameters.AddWithValue("@cimage", path);
             cmd.Parameters.AddWithValue("@cdis", Category_discription.Text);
@@ -43,6 +43,7 @@ namespace Ecom_Project.Admin
                 // Clear form
                 Category_name.Text = "";
                 Category_discription.Text = "";
+                Response.Redirect("Category.aspx");
             }
             else
             {

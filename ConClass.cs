@@ -91,6 +91,29 @@ namespace Ecom_Project
             con.Close();
             return s;
         }
+        public SqlDataReader DataReader(string sqlquery)
+        {
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+            }
+            cmd = new SqlCommand(sqlquery, con);
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            return dr;
+        }
+
+        public DataSet DA_DataSet(string sqlquery)
+        {
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+            }
+            SqlDataAdapter da = new SqlDataAdapter(sqlquery, con);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            return ds;
+        }
 
     }
 }
