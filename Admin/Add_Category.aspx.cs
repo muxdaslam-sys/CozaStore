@@ -42,7 +42,7 @@ namespace Ecom_Project.Admin
             {
                 // Register a script that displays the success toast, and then redirects after 1.5 seconds
                 string script = "showAdminToast('Category Created!', 'The category has been added successfully.', 'success'); " +
-                                "setTimeout(function() { window.location.href = 'Category.aspx'; }, 1500);";
+                                "setTimeout(function() { window.location.href = 'Category.aspx'; }, 3000);";
                 ScriptManager.RegisterStartupScript(this, GetType(), "toast", script, true);
                 
                 // Clear form inputs
