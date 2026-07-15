@@ -316,7 +316,6 @@
     </Compile>
     <Compile Include="Admin\Edit_Product.aspx.cs">
       <DependentUpon>Edit_Product.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\Edit_Product.aspx.designer.cs">
       <DependentUpon>Edit_Product.aspx</DependentUpon>
@@ -360,7 +359,6 @@
     </Compile>
     <Compile Include="User\User.Master.cs">
       <DependentUpon>User.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="User\User.Master.designer.cs">
       <DependentUpon>User.Master</DependentUpon>
