@@ -429,6 +429,26 @@
             font-size: 22px;
             color: #e65540;
         }
+
+        /* Password Visibility Toggle */
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            color: #aaaaaa;
+            font-size: 16px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            user-select: none;
+            z-index: 10;
+        }
+
+        .password-toggle:hover {
+            color: #717fe0;
+        }
+
+        .form-input.password-input {
+            padding-right: 42px;
+        }
     </style>
 </head>
 <body>
@@ -480,7 +500,8 @@
                                 <asp:Label ID="Label2" runat="server" Text="Password" AssociatedControlID="ltb2" CssClass="form-label"></asp:Label>
                                 <div class="input-container">
                                     <i class="input-icon zmdi zmdi-lock"></i>
-                                    <asp:TextBox ID="ltb2" runat="server" TextMode="Password" CssClass="form-input" placeholder="Enter your password"></asp:TextBox>
+                                    <asp:TextBox ID="ltb2" runat="server" TextMode="Password" ClientIDMode="Static" CssClass="form-input password-input" placeholder="Enter your password"></asp:TextBox>
+                                    <span class="password-toggle zmdi zmdi-eye" id="toggle-ltb2" onclick="togglePasswordVisibility('ltb2', 'toggle-ltb2')"></span>
                                 </div>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="ltb2" ErrorMessage="Enter Your Password" ValidationGroup="LoginGroup" CssClass="validator-error" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
@@ -561,7 +582,8 @@
                                     <asp:Label ID="Label10" runat="server" Text="Password" AssociatedControlID="stb8" CssClass="form-label"></asp:Label>
                                     <div class="input-container">
                                         <i class="input-icon zmdi zmdi-lock-open"></i>
-                                        <asp:TextBox ID="stb8" runat="server" TextMode="Password" CssClass="form-input" placeholder="Choose a password"></asp:TextBox>
+                                        <asp:TextBox ID="stb8" runat="server" TextMode="Password" ClientIDMode="Static" CssClass="form-input password-input" placeholder="Choose a password"></asp:TextBox>
+                                        <span class="password-toggle zmdi zmdi-eye" id="toggle-stb8" onclick="togglePasswordVisibility('stb8', 'toggle-stb8')"></span>
                                     </div>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="stb8" ErrorMessage="Enter Your Password" ValidationGroup="RegisterGroup" CssClass="validator-error" Display="Dynamic"></asp:RequiredFieldValidator>
                                 </div>
@@ -589,6 +611,22 @@
 
     <!-- Client-Side Tab Switcher Script -->
     <script type="text/javascript">
+        function togglePasswordVisibility(inputId, toggleIconId) {
+            var passwordInput = document.getElementById(inputId);
+            var toggleIcon = document.getElementById(toggleIconId);
+            if (passwordInput && toggleIcon) {
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    toggleIcon.classList.remove("zmdi-eye");
+                    toggleIcon.classList.add("zmdi-eye-off");
+                } else {
+                    passwordInput.type = "password";
+                    toggleIcon.classList.remove("zmdi-eye-off");
+                    toggleIcon.classList.add("zmdi-eye");
+                }
+            }
+        }
+
         function switchTab(tab) {
             var loginForm = document.getElementById('form-login');
             var registerForm = document.getElementById('form-register');

@@ -35,7 +35,7 @@ namespace Ecom_Project
                 }
                 else if (get_logtype == "user")
                 {
-                    Response.Redirect("~/User/User_HomePage.aspx");
+                    Response.Redirect("~/User/uindex.aspx");
                 }
             }
             else

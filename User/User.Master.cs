@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Ecom_Project.User
 {
-    public partial class User_HomePage : System.Web.UI.Page
+    public partial class User : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

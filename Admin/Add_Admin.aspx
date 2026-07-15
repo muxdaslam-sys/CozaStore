@@ -1,6 +1,29 @@
 <%@ Page Title="Add Admin - CozaStore" Language="C#" MasterPageFile="~/Admin/Admin.Master" AutoEventWireup="true" CodeBehind="Add_Admin.aspx.cs" Inherits="Ecom_Project.Admin.Admin" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .password-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .password-toggle-icon {
+            position: absolute;
+            right: 15px;
+            color: #9ca3af;
+            font-size: 15px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            z-index: 10;
+            user-select: none;
+        }
+        .password-toggle-icon:hover {
+            color: var(--primary);
+        }
+        .form-control-premium.password-input {
+            padding-right: 42px;
+        }
+    </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -65,7 +88,10 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Password <span class="req">*</span></label>
-                                <asp:TextBox ID="tbpwd" runat="server" TextMode="Password" CssClass="form-control-premium" placeholder="Min. 8 characters"></asp:TextBox>
+                                <div class="password-container">
+                                    <asp:TextBox ID="tbpwd" runat="server" TextMode="Password" ClientIDMode="Static" CssClass="form-control-premium password-input" placeholder="Min. 8 characters"></asp:TextBox>
+                                    <span class="password-toggle-icon fa-solid fa-eye" id="toggle-tbpwd" onclick="togglePasswordVisibility('tbpwd', 'toggle-tbpwd')"></span>
+                                </div>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
                                     ControlToValidate="tbpwd" ErrorMessage="Password is required."
                                     CssClass="form-validation-error" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -82,6 +108,21 @@
                 </div>
             </div>
         </div>
-    </div>
-
+    <script type="text/javascript">
+        function togglePasswordVisibility(inputId, toggleIconId) {
+            var passwordInput = document.getElementById(inputId);
+            var toggleIcon = document.getElementById(toggleIconId);
+            if (passwordInput && toggleIcon) {
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    toggleIcon.classList.remove("fa-eye");
+                    toggleIcon.classList.add("fa-eye-slash");
+                } else {
+                    passwordInput.type = "password";
+                    toggleIcon.classList.remove("fa-eye-slash");
+                    toggleIcon.classList.add("fa-eye");
+                }
+            }
+        }
+    </script>
 </asp:Content>

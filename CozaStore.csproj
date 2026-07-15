@@ -75,6 +75,7 @@
     <Content Include="Admin\Admin_HomePage.aspx" />
     <Content Include="Admin\Category.aspx" />
     <Content Include="Admin\Edit_Category.aspx" />
+    <Content Include="Admin\Edit_Product.aspx" />
     <Content Include="Admin\Product.aspx" />
     <Content Include="blog-detail.html" />
     <Content Include="blog.html" />
@@ -184,7 +185,7 @@
     <Content Include="product-detail.html" />
     <Content Include="product.html" />
     <Content Include="shoping-cart.html" />
-    <Content Include="User\User_HomePage.aspx" />
+    <Content Include="User\uindex.aspx" />
     <Content Include="vendor\animate\animate.css" />
     <Content Include="vendor\animsition\css\animsition.css" />
     <Content Include="vendor\animsition\css\animsition.min.css" />
@@ -313,6 +314,13 @@
     <Compile Include="Admin\Edit_Category.aspx.designer.cs">
       <DependentUpon>Edit_Category.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Edit_Product.aspx.cs">
+      <DependentUpon>Edit_Product.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Edit_Product.aspx.designer.cs">
+      <DependentUpon>Edit_Product.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Product.aspx.cs">
       <DependentUpon>Product.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -343,12 +351,19 @@
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="User\User_HomePage.aspx.cs">
-      <DependentUpon>User_HomePage.aspx</DependentUpon>
+    <Compile Include="User\uindex.aspx.cs">
+      <DependentUpon>uindex.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="User\User_HomePage.aspx.designer.cs">
-      <DependentUpon>User_HomePage.aspx</DependentUpon>
+    <Compile Include="User\uindex.aspx.designer.cs">
+      <DependentUpon>uindex.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\User.Master.cs">
+      <DependentUpon>User.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\User.Master.designer.cs">
+      <DependentUpon>User.Master</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -455,6 +470,7 @@
     <Content Include="vendor\slick\slick-theme.scss" />
     <Content Include="vendor\slick\slick.less" />
     <Content Include="vendor\slick\slick.scss" />
+    <Content Include="User\User.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

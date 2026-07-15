@@ -39,7 +39,7 @@ namespace Ecom_Project.Admin
 
             if (Product_image.HasFile)
             {
-                path = "~/images/products" + Product_image.FileName;
+                path = "~/images/products/" + Product_image.FileName;
                 Product_image.SaveAs(Server.MapPath(path));
             }
 

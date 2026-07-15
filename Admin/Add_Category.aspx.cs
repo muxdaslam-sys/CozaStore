@@ -23,7 +23,6 @@ namespace Ecom_Project.Admin
 
             if (Category_image.HasFile)
             {
-                // Save category image under the specific category subfolder
                 path = "~/Images/" + Category_image.FileName;
                 Category_image.SaveAs(Server.MapPath(path));
             }
@@ -40,11 +39,9 @@ namespace Ecom_Project.Admin
             int i = ob.SP_nonquery(cmd);
             if (i != 0)
             {
-                // Register a script that displays the success toast, and then redirects after 1.5 seconds
-                string script = "showAdminToast('Category Created!', 'The category has been added successfully.', 'success'); " +
-                                "setTimeout(function() { window.location.href = 'Category.aspx'; }, 3000);";
-                ScriptManager.RegisterStartupScript(this, GetType(), "toast", script, true);
                 
+                ScriptManager.RegisterStartupScript(this, GetType(), "toast",
+                    "showAdminToast('Category Created!', 'The category has been added successfully.', 'success'); ", true);
                 // Clear form inputs
                 Category_name.Text = "";
                 Category_discription.Text = "";
