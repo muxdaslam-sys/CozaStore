@@ -48,8 +48,10 @@ namespace Ecom_Project
 
         protected void Register_Click(object sender, EventArgs e)
         {
+            stb7_una.Visible = false;
+            lblsuccess.Visible = false;
             string check_user = "select count(reg_id) from login_tab where username='" + stb7.Text + "'";
-            int find = obj.Non_query(check_user);
+            int find = Convert.ToInt32(obj.Scalar(check_user));
             if (find == 0) 
             {
                 string sel = "select max(reg_id) from login_tab";
@@ -74,7 +76,17 @@ namespace Ecom_Project
                     if (i == 1 && j == 1)
                     {
                         lblsuccess.Visible = true;
-
+                        lblsuccess.CssClass = "feedback-message feedback-success";
+                        lblsuccess.Text = "Successfully Registered! Please login to your account";
+                        
+                        stb1.Text = "";
+                        stb2.Text = "";
+                        stb3.Text = "";
+                        stb4.Text = "";
+                        stb5.Text = "";
+                        stb6.Text = "";
+                        stb7.Text = "";
+                        stb8.Text = "";
                     }
                 }
                 else
@@ -82,31 +94,20 @@ namespace Ecom_Project
                     lblsuccess.Visible = true;
                     lblsuccess.CssClass = "feedback-message feedback-danger";
                     lblsuccess.Text = "Account creation failed. Please try again.";
+                    stb8.Attributes["value"] = stb8.Text;
                 }
             }
             else
             {
+                stb7_una.Visible = true;
+                stb7_una.Text = "Username already exists";
+
                 lblsuccess.Visible = true;
                 lblsuccess.CssClass = "feedback-message feedback-danger";
                 lblsuccess.Text = "Account creation failed. User already exist.";
+                stb8.Attributes["value"] = stb8.Text;
             }
             
-        }
-
-        protected void stb7_TextChanged(object sender, EventArgs e)
-        {
-            string check_una = "select count(reg_id) from login_tab where username='" + stb7.Text + "'";
-            int find = obj.Non_query(check_una);
-            if (find == 0)
-            {
-                stb7_una.Visible = false;
-            }
-            else
-            {
-                stb7_una.Visible = true;
-
-                stb7_una.Text = "Username already exists";
-            }
         }
     }
 }
