@@ -570,12 +570,13 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <asp:Label ID="Label9" runat="server" Text="Username" AssociatedControlID="stb7" CssClass="form-label"></asp:Label>
-                                    <div class="input-container">
-                                        <i class="input-icon zmdi zmdi-account-circle"></i>
-                                        <asp:TextBox ID="stb7" runat="server" AutoPostBack="true" OnTextChanged="stb7_TextChanged" CssClass="form-input" placeholder="Username"></asp:TextBox>
-                                    </div>
-                                    <asp:Label ID="stb7_una" runat="server" Text="Username Already Exist" Visible="false" CssClass="validator-error"></asp:Label>
+                                     <asp:Label ID="Label9" runat="server" Text="Username" AssociatedControlID="stb7" CssClass="form-label"></asp:Label>
+                                     <div class="input-container">
+                                         <i class="input-icon zmdi zmdi-account-circle"></i>
+                                         <asp:TextBox ID="stb7" runat="server" CssClass="form-input" placeholder="Username"></asp:TextBox>
+                                     </div>
+                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="stb7" ErrorMessage="Enter Your Username" ValidationGroup="RegisterGroup" CssClass="validator-error" Display="Dynamic"></asp:RequiredFieldValidator>
+                                     <asp:Label ID="stb7_una" runat="server" Text="Username Already Exist" Visible="false" CssClass="validator-error"></asp:Label>
                                 </div>
 
                                 <div class="form-group form-group-full">
