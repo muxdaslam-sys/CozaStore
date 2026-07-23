@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace Ecom_Project
 {
@@ -29,6 +30,9 @@ namespace Ecom_Project
 
                 string sel_logtype = "select logtype from login_tab where username='" + ltb1.Text + "' and password ='" + ltb2.Text + "'";
                 string get_logtype = obj.Scalar(sel_logtype);
+
+                FormsAuthentication.SetAuthCookie(ltb1.Text, false);
+
                 if (get_logtype == "admin")
                 {
                     Response.Redirect("~/Admin/Admin_HomePage.aspx");

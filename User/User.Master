@@ -179,6 +179,18 @@
         .my-account-dropdown .dropdown-logout:hover i {
             color: #ff2e44;
         }
+
+        /* Clean navbar layout alignment when topbar is absent */
+        .wrap-menu-desktop {
+            top: 0px !important;
+            transition: height 0.2s, background-color 0.2s !important;
+            -webkit-transition: height 0.2s, background-color 0.2s !important;
+            -moz-transition: height 0.2s, background-color 0.2s !important;
+            -o-transition: height 0.2s, background-color 0.2s !important;
+        }
+        .header-v4 .container-menu-desktop {
+            height: 0px !important;
+        }
     </style>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -187,7 +199,7 @@
 <body>
     <form id="form1" runat="server">
         <!-- Header -->
-        <header>
+        <header class='<%= (Request.Url.AbsolutePath.EndsWith("/User/") || Request.Url.AbsolutePath.EndsWith("/User") || Request.Url.AbsolutePath.ToLower().Contains("uindex.aspx")) ? "" : "header-v4" %>'>
             <!-- Header desktop -->
             <div class="container-menu-desktop">
                 <!-- Topbar -->
@@ -214,40 +226,35 @@
                     </div>
                 </div>--%>
 
-                <div class="wrap-menu-desktop">
+                <div class="wrap-menu-desktop <%= (Request.Url.AbsolutePath.EndsWith("/User/") || Request.Url.AbsolutePath.EndsWith("/User") || Request.Url.AbsolutePath.ToLower().Contains("uindex.aspx")) ? "" : "how-shadow1" %>">
                     <nav class="limiter-menu-desktop container">
 
                         <!-- Logo desktop -->
-                        <a href="../index.html" class="logo">
+                        <a href="uindex.aspx" class="logo">
                             <img src="../images/icons/logo-01.png" alt="IMG-LOGO">
                         </a>
 
-                        <!-- Menu desktop -->
                         <div class="menu-desktop">
                             <ul class="main-menu">
-                                <li class="active-menu">
-                                    <a href="../index.html">Home</a>
-                                    
+                                <li class="<%= (Request.Url.AbsolutePath.EndsWith("/User/") || Request.Url.AbsolutePath.EndsWith("/User") || Request.Url.AbsolutePath.ToLower().Contains("uindex.aspx")) ? "active-menu" : "" %>">
+                                    <a href="uindex.aspx">Home</a>
                                 </li>
 
-                                <li>
-                                    <a href="../product.html">Shop</a>
+                                <li class="<%= Request.Url.AbsolutePath.ToLower().Contains("product.aspx") ? "active-menu" : "" %>">
+                                    <a href="Product.aspx">Shop</a>
                                 </li>
 
-                                <li class="label1" data-label1="hot">
-                                    <a href="../shoping-cart.html">Features</a>
+                                <%--<li class="label1" data-label1="hot">
+                                    <a href="Shopping-Cart.aspx">Features</a>
+                                </li>--%>
+
+
+                                <li class="<%= Request.Url.AbsolutePath.ToLower().Contains("about.aspx") ? "active-menu" : "" %>">
+                                    <a href="About.aspx">About</a>
                                 </li>
 
-                                <li>
-                                    <a href="../blog.html">Blog</a>
-                                </li>
-
-                                <li>
-                                    <a href="../about.html">About</a>
-                                </li>
-
-                                <li>
-                                    <a href="../contact.html">Contact</a>
+                                <li class="<%= Request.Url.AbsolutePath.ToLower().Contains("contact.aspx") ? "active-menu" : "" %>">
+                                    <a href="Contact.aspx">Contact</a>
                                 </li>
                             </ul>
                         </div>
@@ -287,10 +294,10 @@
                                         Wishlist
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="#" class="dropdown-link-btn dropdown-logout">
-                                        <i class="zmdi zmdi-power"></i>
-                                        Logout
-                                    </a>
+                                     <asp:LinkButton ID="btnLogout" runat="server" CssClass="dropdown-link-btn dropdown-logout" OnClick="btnLogout_Click" CausesValidation="false">
+                                         <i class="zmdi zmdi-power"></i>
+                                         Logout
+                                     </asp:LinkButton>
                                 </div>
                             </div>
                         </div>
@@ -302,7 +309,7 @@
             <div class="wrap-header-mobile">
                 <!-- Logo moblie -->
                 <div class="logo-mobile">
-                    <a href="../index.html">
+                    <a href="uindex.aspx">
                         <img src="../images/icons/logo-01.png" alt="IMG-LOGO"></a>
                 </div>
 
@@ -359,35 +366,24 @@
 
                 <ul class="main-menu-m">
                     <li>
-                        <a href="../index.html">Home</a>
-                        <ul class="sub-menu-m">
-                            <li><a href="../index.html">Homepage 1</a></li>
-                            <li><a href="../home-02.html">Homepage 2</a></li>
-                            <li><a href="../home-03.html">Homepage 3</a></li>
-                        </ul>
-                        <span class="arrow-main-menu-m">
-                            <i class="fa fa-angle-right" aria-hidden="true"></i>
-                        </span>
+                        <a href="uindex.aspx">Home</a>
                     </li>
 
                     <li>
-                        <a href="../product.html">Shop</a>
+                        <a href="Product.aspx">Shop</a>
+                    </li>
+
+                    <%--<li>
+                        <a href="Shopping-Cart.aspx" class="label1 rs1" data-label1="hot">Features</a>
+                    </li>--%>
+
+
+                    <li>
+                        <a href="About.aspx">About</a>
                     </li>
 
                     <li>
-                        <a href="../shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
-                    </li>
-
-                    <li>
-                        <a href="../blog.html">Blog</a>
-                    </li>
-
-                    <li>
-                        <a href="../about.html">About</a>
-                    </li>
-
-                    <li>
-                        <a href="../contact.html">Contact</a>
+                        <a href="Contact.aspx">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -475,10 +471,10 @@
                         </div>
 
                         <div class="header-cart-buttons flex-w w-full">
-                            <a href="../shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">View Cart
+                            <a href="Shopping-Cart.aspx" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">View Cart
 						</a>
 
-                            <a href="../shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">Check Out
+                            <a href="Shopping-Cart.aspx" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">Check Out
 						</a>
                         </div>
                     </div>
@@ -488,75 +484,7 @@
 
 
 
-        <!-- Slider -->
-        <section class="section-slide">
-            <div class="wrap-slick1">
-                <div class="slick1">
-                    <%--<div class="item-slick1" style="background-image: url(../images/mens_banner_wide.png);">
-                        <div class="container h-full">
-                            <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-                                <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
-                                    <span class="ltext-101 cl2 respon2">Men Collection 2018
-								</span>
-                                </div>
 
-                                <div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
-                                    <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">NEW SEASON
-								</h2>
-                                </div>
-
-                                <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
-                                    <a href="../product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">Shop Now
-								</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>--%>
-
-                    <div class="item-slick1" style="background-image: url(../images/slide-02.jpg);">
-                        <div class="container h-full">
-                            <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-                                <div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
-                                    <span class="ltext-101 cl2 respon2">Men New-Season
-								</span>
-                                </div>
-
-                                <div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn" data-delay="800">
-                                    <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">Jackets & Coats
-								</h2>
-                                </div>
-
-                                <div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
-                                    <a href="../product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">Shop Now
-								</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item-slick1" style="background-image: url(../images/slide-03.jpg);">
-                        <div class="container h-full">
-                            <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-                                <div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
-                                    <span class="ltext-101 cl2 respon2">Men Collection 2018
-								</span>
-                                </div>
-
-                                <div class="layer-slick1 animated visible-false" data-appear="rotateInUpRight" data-delay="800">
-                                    <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">New arrivals
-								</h2>
-                                </div>
-
-                                <div class="layer-slick1 animated visible-false" data-appear="rotateIn" data-delay="1600">
-                                    <a href="../product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">Shop Now
-								</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

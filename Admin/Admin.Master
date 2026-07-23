@@ -160,7 +160,7 @@
                                 </li>
                                 <li class="pm-divider"></li>
                                 <li>
-                                    <asp:LinkButton ID="lnkLogout" runat="server" CssClass="logout-btn">
+                                    <asp:LinkButton ID="btnLogout" runat="server" CssClass="logout-btn" OnClick="btnLogout_Click" CausesValidation="false">
                                         <i class="fa-solid fa-right-from-bracket"></i> Logout
                                     </asp:LinkButton>
                                 </li>
