@@ -28,5 +28,12 @@ namespace Ecom_Project.User
             }
 
         }
+
+        protected void IB_u_Command(object sender, CommandEventArgs e)
+        {
+            string categoryId = e.CommandArgument.ToString();
+
+            Response.Redirect("Product.aspx?categoryId=" + categoryId);
+        }
     }
 }

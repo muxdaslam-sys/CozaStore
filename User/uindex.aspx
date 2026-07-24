@@ -257,8 +257,15 @@
                         </div>
                     </div>
                     
-                    <!-- Click overlay preserving ImageButton server control properties -->
-                    <asp:ImageButton ID="IB_u" runat="server" ImageUrl='<%# Eval("Category_image") %>' CssClass="category-click-target" />
+                    <!-- Click overlay using ImageButton server control -->
+                    <asp:ImageButton 
+                        ID="IB_u" 
+                        runat="server"
+                        ImageUrl='<%# Eval("Category_image") %>'
+                        CssClass="category-click-target"
+                        CommandArgument='<%# Eval("Category_id") %>'
+                        OnCommand="IB_u_Command"
+                        CausesValidation="false" />
                 </div>
             </ItemTemplate>
         </asp:DataList>
