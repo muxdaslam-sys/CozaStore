@@ -11,11 +11,7 @@ namespace Ecom_Project.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["uid"] == null)
-            {
-                Response.Redirect("~/Login.aspx");
-                return;
-            }
+           
         }
     }
 }

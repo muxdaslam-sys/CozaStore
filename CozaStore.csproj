@@ -68,7 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="about.html" />
-    <Content Include="Admin\ad.aspx" />
     <Content Include="Admin\Add_Category.aspx" />
     <Content Include="Admin\Add_Product.aspx" />
     <Content Include="Admin\Add_Admin.aspx" />
@@ -263,13 +262,6 @@
     <Content Include="Index.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\ad.aspx.cs">
-      <DependentUpon>ad.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\ad.aspx.designer.cs">
-      <DependentUpon>ad.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Admin\Add_Category.aspx.cs">
       <DependentUpon>Add_Category.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

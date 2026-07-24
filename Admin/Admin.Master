@@ -132,7 +132,7 @@
                     </button>
 
                     <!-- Visit Store -->
-                    <a href="../Index.aspx" target="_blank" class="nav-icon-btn" title="Visit Store" aria-label="Visit Store">
+                    <a href="../user/uindex.aspx" target="_blank" class="nav-icon-btn" title="Visit Store" aria-label="Visit Store">
                         <i class="fa-solid fa-store"></i>
                     </a>
 
