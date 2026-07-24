@@ -27,7 +27,7 @@ namespace Ecom_Project.Admin
 
             if (Category_image.HasFile)
             {
-                path = "~/Images/" + Category_image.FileName;
+                path = "~/Images/category/" + Category_image.FileName;
                 Category_image.SaveAs(Server.MapPath(path));
             }
 
