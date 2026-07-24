@@ -15,6 +15,8 @@ namespace Ecom_Project.Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
+           
+
             if (!IsPostBack)
             {
                 SqlCommand cmd = new SqlCommand();
@@ -47,7 +49,7 @@ namespace Ecom_Project.Admin
 
             if (Category_image.HasFile)
             {
-                path = "~/images/" + Category_image.FileName;
+                path = "~/Images/category/" + Category_image.FileName;
                 Category_image.SaveAs(Server.MapPath(path));
             }
 

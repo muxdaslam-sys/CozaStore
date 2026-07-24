@@ -68,7 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="about.html" />
-    <Content Include="Admin\ad.aspx" />
     <Content Include="Admin\Add_Category.aspx" />
     <Content Include="Admin\Add_Product.aspx" />
     <Content Include="Admin\Add_Admin.aspx" />
@@ -185,6 +184,11 @@
     <Content Include="product-detail.html" />
     <Content Include="product.html" />
     <Content Include="shoping-cart.html" />
+    <Content Include="User\About.aspx" />
+    <Content Include="User\Contact.aspx" />
+    <Content Include="User\Product.aspx" />
+    <Content Include="User\Product-Details.aspx" />
+    <Content Include="User\Shopping-Cart.aspx" />
     <Content Include="User\uindex.aspx" />
     <Content Include="vendor\animate\animate.css" />
     <Content Include="vendor\animsition\css\animsition.css" />
@@ -258,13 +262,6 @@
     <Content Include="Index.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\ad.aspx.cs">
-      <DependentUpon>ad.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\ad.aspx.designer.cs">
-      <DependentUpon>ad.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Admin\Add_Category.aspx.cs">
       <DependentUpon>Add_Category.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -316,6 +313,7 @@
     </Compile>
     <Compile Include="Admin\Edit_Product.aspx.cs">
       <DependentUpon>Edit_Product.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\Edit_Product.aspx.designer.cs">
       <DependentUpon>Edit_Product.aspx</DependentUpon>
@@ -350,6 +348,41 @@
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="User\About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\Contact.aspx.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\Contact.aspx.designer.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\Product.aspx.cs">
+      <DependentUpon>Product.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\Product.aspx.designer.cs">
+      <DependentUpon>Product.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\Product-Details.aspx.cs">
+      <DependentUpon>Product-Details.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\Product-Details.aspx.designer.cs">
+      <DependentUpon>Product-Details.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\Shopping-Cart.aspx.cs">
+      <DependentUpon>Shopping-Cart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\Shopping-Cart.aspx.designer.cs">
+      <DependentUpon>Shopping-Cart.aspx</DependentUpon>
+    </Compile>
     <Compile Include="User\uindex.aspx.cs">
       <DependentUpon>uindex.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -359,6 +392,7 @@
     </Compile>
     <Compile Include="User\User.Master.cs">
       <DependentUpon>User.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="User\User.Master.designer.cs">
       <DependentUpon>User.Master</DependentUpon>

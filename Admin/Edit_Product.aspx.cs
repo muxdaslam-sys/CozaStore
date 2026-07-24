@@ -15,6 +15,8 @@ namespace Ecom_Project.Admin
         ConClass ob = new ConClass();
         protected void Page_Load(object sender, EventArgs e)
         {
+          
+
             if (!IsPostBack)
             {
                 SqlCommand cmd = new SqlCommand();
@@ -49,7 +51,7 @@ namespace Ecom_Project.Admin
 
             if (Product_image.HasFile)
             {
-                path = "~/images/products/" + Product_image.FileName;
+                path = "~/Images/products/" + Product_image.FileName;
                 Product_image.SaveAs(Server.MapPath(path));
             }
 

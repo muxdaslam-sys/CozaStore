@@ -50,7 +50,7 @@
         var posWrapHeader = $('.top-bar').height();
     }
     else {
-        var posWrapHeader = 0;
+        var posWrapHeader = 15;
     }
     
 

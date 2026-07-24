@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,6 +14,8 @@ namespace Ecom_Project.User
         ConClass ob = new ConClass();
         protected void Page_Load(object sender, EventArgs e)
         {
+           
+
             if (!IsPostBack)
             {
                 SqlCommand cmd = new SqlCommand();
@@ -25,6 +27,13 @@ namespace Ecom_Project.User
                 DL_u.DataBind();
             }
 
+        }
+
+        protected void IB_u_Command(object sender, CommandEventArgs e)
+        {
+            string categoryId = e.CommandArgument.ToString();
+
+            Response.Redirect("Product.aspx?categoryId=" + categoryId);
         }
     }
 }

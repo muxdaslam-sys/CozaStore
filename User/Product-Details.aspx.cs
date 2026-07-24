@@ -5,13 +5,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Ecom_Project.Admin
+namespace Ecom_Project.User
 {
-    public partial class Admin_HomePage : System.Web.UI.Page
+    public partial class Product_Details : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+            
         }
     }
 }

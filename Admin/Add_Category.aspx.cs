@@ -14,7 +14,7 @@ namespace Ecom_Project.Admin
         ConClass ob = new ConClass();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void btn_add_Click(object sender, EventArgs e)
@@ -23,7 +23,7 @@ namespace Ecom_Project.Admin
 
             if (Category_image.HasFile)
             {
-                path = "~/Images/" + Category_image.FileName;
+                path = "~/Images/category/" + Category_image.FileName;
                 Category_image.SaveAs(Server.MapPath(path));
             }
 
