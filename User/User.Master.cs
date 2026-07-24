@@ -27,7 +27,8 @@ namespace Ecom_Project.User
             // Prevent caching
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
             Response.Cache.SetNoStore();
-            Response.Cache.SetExpires(DateTime.UtcNow.AddYears(-1));
+            Response.Cache.SetExpires(DateTime.UtcNow.AddDays(-1));
+            Response.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
 
             // Go back to login
             Response.Redirect("~/Login.aspx");
