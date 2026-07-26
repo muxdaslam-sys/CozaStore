@@ -598,12 +598,12 @@
 
                     </div>
 
-                    <!-- Return to Home Page Link -->
+<%--                    <!-- Return to Home Page Link -->
                     <div class="back-to-home">
                         <a href="index.aspx" class="back-link">
                             <i class="zmdi zmdi-arrow-left"></i> Back to Homepage
                         </a>
-                    </div>
+                    </div>--%>
 
                 </div>
             </div>
