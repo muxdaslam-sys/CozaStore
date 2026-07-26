@@ -314,7 +314,7 @@
                     <div class="p-b-52">
                         <!-- Category Buttons (Server-Side Bound) -->
                         <div class="flex-w flex-c-m filter-tope-group m-tb-10">
-                            <asp:Button ID="BtnAll" runat="server" OnClick="BtnAll_Click" Text="All Products" CssClass="filter-btn active-filter" data-category-id="0" />
+                            <asp:Button ID="BtnAll" runat="server" OnClick="BtnAll_Click" Text="All Products" CssClass="filter-btn" data-category-id="0" />
                             
                             <asp:DataList ID="DL_cat" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" CssClass="category-datalist">
                                 <ItemTemplate>
@@ -422,6 +422,16 @@
             if (e.target && e.target.classList && e.target.classList.contains('filter-btn')) {
                 var btnText = e.target.value || e.target.textContent || "";
                 sessionStorage.setItem('activeCategory', btnText.trim());
+                
+                // Immediately highlight the clicked button client-side to prevent any visual delay/flicker
+                var filterButtons = document.querySelectorAll('.filter-btn');
+                filterButtons.forEach(function (btn) {
+                    if (btn === e.target) {
+                        btn.classList.add('active-filter');
+                    } else {
+                        btn.classList.remove('active-filter');
+                    }
+                });
             }
         });
 
