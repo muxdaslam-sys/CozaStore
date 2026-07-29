@@ -372,8 +372,83 @@
 
         .pd-cart-btn:hover {
             background: #717fe0;
-            box-shadow: 0 12px 30px rgba(113,127,224,0.35);
-            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(113,127,224,0.35);
+            transform: translateY(-2px);
+        }
+
+        /* ---------- Navigation Action Buttons ---------- */
+        .pd-action-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .pd-nav-btn-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .pd-continue-btn {
+            flex: 1;
+            height: 48px;
+            border: 2px solid #222222;
+            border-radius: 12px;
+            background: #222222;
+            color: #ffffff !important;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-decoration: none !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .pd-continue-btn:hover {
+            background: #717fe0;
+            border-color: #717fe0;
+            color: #ffffff !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(113, 127, 224, 0.25);
+        }
+
+        .pd-viewcart-btn {
+            flex: 1;
+            height: 48px;
+            border: 2px solid #e6e6e6;
+            border-radius: 12px;
+            background: #ffffff;
+            color: #222222 !important;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-decoration: none !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .pd-viewcart-btn:hover {
+            background: #f8f9fa;
+            border-color: #717fe0;
+            color: #717fe0 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        @media (max-width: 500px) {
+            .pd-nav-btn-row {
+                flex-direction: column;
+            }
         }
 
         .pd-cart-btn:active {
@@ -627,8 +702,19 @@
                         <%-- Hidden Stock Value --%>
                         <asp:HiddenField ID="hft" runat="server" />
 
-                        <%-- Add To Cart Button --%>
-                        <asp:Button ID="btnaddtocart" runat="server" Text="Add To Cart" OnClick="btnaddtocart_Click" CssClass="pd-cart-btn" />
+                        <%-- Add To Cart & Navigation Buttons --%>
+                        <div class="pd-action-group">
+                            <asp:Button ID="btnaddtocart" runat="server" Text="Add To Cart" OnClick="btnaddtocart_Click" CssClass="pd-cart-btn" />
+                            
+                            <div class="pd-nav-btn-row">
+                                <a href="Product.aspx" class="pd-continue-btn">
+                                    <i class="fa fa-shopping-bag"></i> Continue Shopping
+                                </a>
+                                <a href="Shopping-Cart.aspx" class="pd-viewcart-btn">
+                                    <i class="fa fa-shopping-cart"></i> View Cart
+                                </a>
+                            </div>
+                        </div>
 
                         <%-- Trust & Feature Badges --%>
                         <div class="pd-features">
