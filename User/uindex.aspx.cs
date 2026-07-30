@@ -19,9 +19,11 @@ namespace Ecom_Project.User
             if (!IsPostBack)
             {
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "SP_Category";
-                cmd.Parameters.AddWithValue("@Action", 4);
+                cmd.CommandText = @"SELECT Category_id, Category_name,Category_image,Category_description
+                                FROM Category_tab
+                                WHERE Category_status = @status";
+
+                cmd.Parameters.AddWithValue("@status", "available");
                 DataSet ds = ob.SP_Adapter(cmd);
                 DL_u.DataSource = ds;
                 DL_u.DataBind();
