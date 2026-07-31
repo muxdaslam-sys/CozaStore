@@ -99,13 +99,13 @@ namespace Ecom_Project.User
 
         protected void btnaddtocart_Click(object sender, EventArgs e)
         {
-            if (Session["UserId"] == null && Session["uid"] == null)
+            if (Session["uid"] == null)
             {
                 Response.Redirect("~/Login.aspx");
                 return;
             }
 
-            int userId = Session["UserId"] != null ? Convert.ToInt32(Session["UserId"]) : Convert.ToInt32(Session["uid"]);
+            int userId = Convert.ToInt32(Session["uid"]);
             int productId = Convert.ToInt32(Request.QueryString["ProductId"]);
             int qty = Convert.ToInt32(txtbstock.Text);
             int stock = Convert.ToInt32(hft.Value);
