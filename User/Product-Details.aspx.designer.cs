@@ -141,15 +141,6 @@ namespace Ecom_Project.User
         protected global::System.Web.UI.WebControls.Label lbltotal;
 
         /// <summary>
-        /// hft control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hft;
-
-        /// <summary>
         /// lblmsg control.
         /// </summary>
         /// <remarks>
@@ -157,6 +148,15 @@ namespace Ecom_Project.User
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblmsg;
+
+        /// <summary>
+        /// hft control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hft;
 
         /// <summary>
         /// btnaddtocart control.
