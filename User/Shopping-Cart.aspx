@@ -561,10 +561,10 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <%-- ScriptManager on top --%>
+    <%# Eval("Product_stock") %>
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
 
-    <%-- UpdatePanel wraps everything so button clicks don't reload full page --%>
+    <%-- Hidden fields --%>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
 
@@ -664,7 +664,7 @@
                                 </div>
                             </div>
 
-                            <asp:Button ID="Button1" runat="server" Text="Proceed to Checkout" CssClass="coza-checkout-btn" />
+                            <asp:Button ID="btncheckout" runat="server" Text="Proceed to Checkout" CssClass="coza-checkout-btn" OnClick="btncheckout_Click" />
 
                             <a href="Product.aspx" class="coza-continue-shopping-btn">
                                 <i class="fa fa-shopping-bag"></i> Continue Shopping

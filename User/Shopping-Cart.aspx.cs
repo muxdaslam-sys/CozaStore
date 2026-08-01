@@ -190,5 +190,11 @@ namespace Ecom_Project.User
             string jsMsg = (name + " has been removed from your cart").Replace("'", "\\'");
             ScriptManager.RegisterStartupScript(this, this.GetType(), "itemRemovedAlert", "showPdToast('Item Removed', '" + jsMsg + "', 'warning');", true);
         }
+
+
+        protected void btncheckout_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Checkout.aspx");
+        }
     }
 }
