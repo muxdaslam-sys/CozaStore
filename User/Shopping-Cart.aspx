@@ -9,7 +9,7 @@
         /* ---------- Page Wrapper & Clearance ---------- */
         .coza-cart-wrapper {
             background: linear-gradient(180deg, #f8f9fd 0%, #ffffff 100%);
-            padding-top: 140px; /* Clears fixed header-v4 navigation bar completely */
+            padding-top: 50px; /* 50px top padding below header-v4 */
             padding-bottom: 90px;
             font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             min-height: 85vh;
@@ -435,7 +435,7 @@
         ═══════════════════════════════════════════ */
         .pd-toast-container {
             position: fixed;
-            top: 140px;
+            top: 100px;
             right: 28px;
             z-index: 999999;
             display: flex;
@@ -529,7 +529,9 @@
         }
 
         @media (max-width: 768px) {
-            .coza-cart-wrapper { padding-top: 110px; }
+            .coza-cart-wrapper { padding-top: 35px; }
+            .pd-toast-container { top: 90px; right: 16px; left: 16px; }
+            .pd-toast { min-width: unset; width: 100%; max-width: 100%; }
 
             .coza-cart-table-head { display: none; }
 
