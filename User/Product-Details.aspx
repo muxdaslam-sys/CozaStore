@@ -10,7 +10,7 @@
         /* ---------- Page Background & Navbar Clearance ---------- */
         .pd-page {
             background: linear-gradient(180deg, #f8f9fd 0%, #ffffff 100%);
-            padding: 140px 0 90px; /* 140px clears the fixed header-v4 navigation bar completely */
+            padding: 50px 0 90px; /* 50px top padding below header-v4 */
             font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             min-height: 100vh;
         }
@@ -468,7 +468,7 @@
         ═══════════════════════════════════════════ */
         .pd-toast-container {
             position: fixed;
-            top: 28px;
+            top: 100px;
             right: 28px;
             z-index: 999999;
             display: flex;
@@ -551,7 +551,7 @@
            RESPONSIVE BREAKPOINTS
         ═══════════════════════════════════════════ */
         @media (max-width: 992px) {
-            .pd-page { padding: 110px 0 70px; }
+            .pd-page { padding: 40px 0 70px; }
             .pd-grid {
                 grid-template-columns: 1fr;
                 gap: 35px;
@@ -565,13 +565,15 @@
         }
 
         @media (max-width: 576px) {
-            .pd-page { padding: 95px 0 60px; }
+            .pd-page { padding: 30px 0 60px; }
             .pd-grid { padding: 0 16px; }
             .pd-img-frame { min-height: 300px; padding: 18px; }
             .pd-main-image { height: 280px; }
             .pd-product-name { font-size: 24px; }
             .pd-features { grid-template-columns: 1fr; }
             .pd-nav-btn-row { flex-direction: column; }
+            .pd-toast-container { top: 90px; right: 16px; left: 16px; }
+            .pd-toast { min-width: unset; width: 100%; max-width: 100%; }
         }
     </style>
 </asp:Content>
