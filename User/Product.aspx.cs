@@ -87,6 +87,7 @@ namespace Ecom_Project.User
 
         protected void BtnAll_Click(object sender, EventArgs e)
         {
+            ViewState["CategoryId"] = 0;
             BindAllProducts();
         }
 
@@ -101,13 +102,42 @@ namespace Ecom_Project.User
         protected void BtnCat_Command(object sender, CommandEventArgs e)
         {
             int categoryId = Convert.ToInt32(e.CommandArgument);
-
+            ViewState["CategoryId"] = categoryId;
             BindProductsByCategory(categoryId);
         }
 
-        protected void TxtSearch_TextChanged(object sender, EventArgs e)
+        protected void BtnSearch_Click(object sender, EventArgs e)
         {
-            // Placeholder: code your search text change logic here later
+            int categoryId;
+
+            if (ViewState["CategoryId"] == null)
+            {
+                categoryId = 0;
+            }
+            else
+            {
+                categoryId = Convert.ToInt32(ViewState["CategoryId"]);
+            }
+
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = @"SELECT Product_id, Product_image,Product_name,Product_description,Product_price
+                                FROM Product_tab
+                                WHERE Product_status = @status and (Product_name like @search or Product_description like @search) ";
+
+            if (categoryId != 0)
+            {
+                cmd.CommandText += " AND Category_id = @CategoryId";
+                cmd.Parameters.AddWithValue("@CategoryId", categoryId);
+            }
+
+            cmd.Parameters.AddWithValue("@status", "available");
+            cmd.Parameters.AddWithValue("@search", "%" + TxtSearch.Text.Trim() + "%");
+
+            DL_Product.DataSource = ob.SP_Adapter(cmd);
+            DL_Product.DataBind();
         }
+
+        
     }
 }
