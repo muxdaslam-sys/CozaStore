@@ -42,7 +42,7 @@ namespace Ecom_Project.User
         {
             int uid = Convert.ToInt32(Session["uid"]);
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = @"select user_name,User_address,User_phone,User_pincode
+            cmd.CommandText = @"select user_name,user_email,User_address,User_phone,User_pincode
                                             from user_tab
                                             WHERE User_id = @uid ";
             cmd.Parameters.AddWithValue("@uid", uid);
@@ -50,6 +50,7 @@ namespace Ecom_Project.User
             while (dr.Read())
             {
                 lblname.Text = dr["user_name"].ToString();
+                lblemail.Text= dr["user_email"].ToString();
                 lblnumber.Text = dr["User_phone"].ToString();
                 lbladdress.Text = dr["User_address"].ToString();
                 lblpincode.Text = dr["User_pincode"].ToString();
@@ -99,17 +100,15 @@ namespace Ecom_Project.User
 
             // Get next OrderGroupID
             SqlCommand groupCmd = new SqlCommand();
-            groupCmd.CommandText = @"SELECT ISNULL(MAX(OrderGroupID),0)+101
-                             FROM Order_tab";
+            groupCmd.CommandText = @"SELECT ISNULL(MAX(OrderGroupID),0)+1
+                                     FROM Order_tab";
 
             int orderGroupID = Convert.ToInt32(ob.SP_Scalar(groupCmd));
 
             // Get all cart items
             SqlCommand cartCmd = new SqlCommand();
-            cartCmd.CommandText = @"SELECT Product_id, Quantity, SubTotal
-                            FROM Cart_tab
-                            WHERE User_id=@uid
-                            AND Cart_status=1";
+            cartCmd.CommandText = @"SELECT Product_id, Quantity, SubTotal FROM Cart_tab
+                                    WHERE User_id=@uid AND Cart_status=1";
 
             cartCmd.Parameters.AddWithValue("@uid", uid);
 
@@ -120,22 +119,8 @@ namespace Ecom_Project.User
             {
                 SqlCommand orderCmd = new SqlCommand();
 
-                orderCmd.CommandText = @"INSERT INTO Order_tab
-                                (User_id,
-                                 Product_id,
-                                 Quantity,
-                                 SubTotal,
-                                 Order_status,
-                                 Order_Date,
-                                 OrderGroupID)
-                                VALUES
-                                (@uid,
-                                 @pid,
-                                 @qty,
-                                 @subtotal,
-                                 'New Order',
-                                 GETDATE(),
-                                 @groupid)";
+                orderCmd.CommandText = @"INSERT INTO Order_tab (User_id,Product_id,Quantity, SubTotal,Order_status, Order_Date, OrderGroupID)
+                                         VALUES (@uid, @pid, @qty, @subtotal, 'New Order',GETDATE(), @groupid)";
 
                 orderCmd.Parameters.AddWithValue("@uid", uid);
                 orderCmd.Parameters.AddWithValue("@pid", row["Product_id"]);
@@ -149,16 +134,8 @@ namespace Ecom_Project.User
             // Insert into Payment_tab
             SqlCommand paymentCmd = new SqlCommand();
 
-            paymentCmd.CommandText = @"INSERT INTO Payment_tab
-                              (User_id,
-                               GrandTotal,
-                               Payment_date,
-                               OrderGroupID)
-                              VALUES
-                              (@uid,
-                               @total,
-                               GETDATE(),
-                               @groupid)";
+            paymentCmd.CommandText = @"INSERT INTO Payment_tab (User_id, GrandTotal, Payment_date,OrderGroupID)
+                                       VALUES (@uid,@total,GETDATE(),@groupid)";
 
             paymentCmd.Parameters.AddWithValue("@uid", uid);
             paymentCmd.Parameters.AddWithValue("@total", Convert.ToDecimal(lbltotal.Text));
@@ -169,18 +146,17 @@ namespace Ecom_Project.User
             // Clear cart
             SqlCommand updateCmd = new SqlCommand();
 
-            updateCmd.CommandText = @"UPDATE Cart_tab
-                              SET Cart_status=0
-                              WHERE User_id=@uid
-                              AND Cart_status=1";
+            updateCmd.CommandText = @"UPDATE Cart_tab SET Cart_status=0
+                                      WHERE User_id=@uid
+                                      AND Cart_status=1";
 
             updateCmd.Parameters.AddWithValue("@uid", uid);
 
             ob.SP_nonquery(updateCmd);
 
             // Redirect
-            //Response.Redirect("OrderSuccess.aspx");
-            lbltotal.Text = "inserted";
+            Response.Redirect("Billing.aspx?orderGroupID=" + orderGroupID);
+
         }
     }
 }
