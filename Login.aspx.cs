@@ -30,7 +30,7 @@ namespace Ecom_Project
 
                 string sel_logtype = "select logtype from login_tab where username='" + ltb1.Text + "' and password ='" + ltb2.Text + "'";
                 string get_logtype = obj.Scalar(sel_logtype);
-
+                Session["logtype"] = get_logtype;
                 FormsAuthentication.SetAuthCookie(ltb1.Text, false);
 
                 if (get_logtype == "admin")
