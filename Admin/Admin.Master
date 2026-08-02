@@ -39,10 +39,9 @@
         <nav id="sidebar">
 
             <!-- Logo Brand -->
-            <div class="sidebar-brand">
-                <img src="../Images/icons/logo-01.png" alt="CozaStore Logo" class="logo-img" />
-                <span class="brand-badge">Admin</span>
-            </div>
+            <a href="Admin_HomePage.aspx" class="sidebar-brand" title="CozaStore Admin Dashboard">
+                <img src="../images/icons/logo-01.png" alt="CozaStore Logo" class="logo-img" />
+            </a>
 
             <!-- Navigation -->
             <div class="sidebar-nav">
