@@ -114,12 +114,15 @@ html, body {
     border-bottom: 1px solid var(--border);
     flex-shrink: 0;
     gap: 12px;
+    text-decoration: none !important;
 }
 
 .sidebar-brand img.logo-img {
-    height: 28px;
+    height: 26px;
+    max-height: 28px;
     width: auto;
     object-fit: contain;
+    display: block;
 }
 
 .sidebar-brand .brand-badge {
@@ -683,7 +686,7 @@ select.form-control-premium option { background: #fff; color: var(--text-primary
 /* Toast Container – fixed top-right */
 .toast-container {
     position: fixed;
-    top: 24px;
+    top: 80px;
     right: 24px;
     z-index: 99999;
     display: flex;
@@ -844,7 +847,7 @@ select.form-control-premium option { background: #fff; color: var(--text-primary
 
 /* Responsive: shrink on small screens */
 @media (max-width: 480px) {
-    .toast-container { right: 12px; left: 12px; top: 12px; }
+    .toast-container { right: 12px; left: 12px; top: 72px; }
     .admin-toast { min-width: 0; width: 100%; }
 }
 
