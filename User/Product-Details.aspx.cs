@@ -166,8 +166,15 @@ namespace Ecom_Project.User
             {
                 lblmsg.ForeColor = System.Drawing.Color.Green;
                 lblmsg.Text = "Added to cart successfully.";
-                ScriptManager.RegisterStartupScript(this, GetType(), "toast",
-                    "showPdToast('Success!', 'Added to cart successfully.', 'success');", true);
+
+                // Calculate updated cart count
+                SqlCommand countCmd = new SqlCommand();
+                countCmd.CommandText = @"SELECT ISNULL(SUM(Quantity), 0) FROM Cart_tab WHERE User_id = @uid AND Cart_status = 1";
+                countCmd.Parameters.AddWithValue("@uid", userId);
+                int cartCount = Convert.ToInt32(ob.SP_Scalar(countCmd));
+
+                string jsCode = $"showPdToast('Success!', 'Added to cart successfully.', 'success'); document.querySelectorAll('.icon-header-noti').forEach(function(el) {{ el.setAttribute('data-notify', '{cartCount}'); }});";
+                ScriptManager.RegisterStartupScript(this, GetType(), "toast", jsCode, true);
             }
             else
             {
