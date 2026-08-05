@@ -185,7 +185,9 @@
     <Content Include="product.html" />
     <Content Include="shoping-cart.html" />
     <Content Include="User\About.aspx" />
+    <Content Include="User\Checkout.aspx" />
     <Content Include="User\Contact.aspx" />
+    <Content Include="User\Billing.aspx" />
     <Content Include="User\Product.aspx" />
     <Content Include="User\Product-Details.aspx" />
     <Content Include="User\Shopping-Cart.aspx" />
@@ -355,12 +357,26 @@
     <Compile Include="User\About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
+    <Compile Include="User\Checkout.aspx.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\Checkout.aspx.designer.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
+    </Compile>
     <Compile Include="User\Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="User\Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\Billing.aspx.cs">
+      <DependentUpon>Billing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\Billing.aspx.designer.cs">
+      <DependentUpon>Billing.aspx</DependentUpon>
     </Compile>
     <Compile Include="User\Product.aspx.cs">
       <DependentUpon>Product.aspx</DependentUpon>

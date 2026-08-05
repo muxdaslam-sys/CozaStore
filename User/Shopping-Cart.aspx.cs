@@ -51,6 +51,15 @@ namespace Ecom_Project.User
                 lblcartmsg.Text = "Your cart is empty";
                 lblTotal.Text = "0";
             }
+
+            // Update cart count badge on header
+            SqlCommand countCmd = new SqlCommand();
+            countCmd.CommandText = @"SELECT ISNULL(SUM(Quantity), 0) FROM Cart_tab WHERE User_id = @uid AND Cart_status = 1";
+            countCmd.Parameters.AddWithValue("@uid", uid);
+            int totalQty = Convert.ToInt32(ob.SP_Scalar(countCmd));
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "updateCartBadgeCartPage",
+                $"document.querySelectorAll('.icon-header-noti').forEach(function(el) {{ el.setAttribute('data-notify', '{totalQty}'); }});", true);
         }
 
         protected void btnplus_Click(object sender, EventArgs e)
@@ -189,6 +198,29 @@ namespace Ecom_Project.User
 
             string jsMsg = (name + " has been removed from your cart").Replace("'", "\\'");
             ScriptManager.RegisterStartupScript(this, this.GetType(), "itemRemovedAlert", "showPdToast('Item Removed', '" + jsMsg + "', 'warning');", true);
+        }
+
+
+        protected void btncheckout_Click(object sender, EventArgs e)
+        {
+            int uid = Convert.ToInt32(Session["uid"]);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = @"SELECT COUNT(*) 
+                                     FROM Cart_tab 
+                                     WHERE User_id = @uid 
+                                     AND Cart_status = 1";
+            cmd.Parameters.AddWithValue("@uid", uid);
+            int count = Convert.ToInt32(ob.SP_Scalar(cmd));
+            if (count > 0)
+            {
+                Response.Redirect("Checkout.aspx");
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "stockAlert", "showPdToast('Your Cart Is Empty','Please Add Itmes To Your Cart', 'error');", true);
+
+            }
+
         }
     }
 }

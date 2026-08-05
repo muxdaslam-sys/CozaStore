@@ -280,14 +280,11 @@
     <!-- Ajax ScriptManager -->
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-    <!-- Spacer to push page content below the navigation bar -->
-    <div style="height: 84px;"></div>
-
     <!-- Asynchronous UpdatePanel to avoid full page reloads -->
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <!-- Product Catalog Section -->
-            <div class="bg0 p-t-60 p-b-100">
+            <div class="bg0 p-t-50 p-b-100">
                 <div class="container">
                     
                     <!-- Page Header -->
@@ -303,8 +300,8 @@
                     <!-- Premium Centered Search Bar (Wired for TextChanged server events inside AJAX) -->
                     <asp:Panel ID="PnlSearch" runat="server" DefaultButton="BtnSearch" CssClass="search-container">
                         <div class="search-bar-wrap">
-                            <asp:TextBox ID="TxtSearch" runat="server" CssClass="search-input-field" placeholder="Search by product name..." AutoPostBack="true" OnTextChanged="TxtSearch_TextChanged"></asp:TextBox>
-                            <asp:LinkButton ID="BtnSearch" runat="server" CssClass="search-icon-btn">
+                            <asp:TextBox ID="TxtSearch" runat="server" CssClass="search-input-field" placeholder="Search by product name..."></asp:TextBox>
+                            <asp:LinkButton ID="BtnSearch" runat="server" OnClick="BtnSearch_Click" CssClass="search-icon-btn">
                                 <i class="zmdi zmdi-search"></i>
                             </asp:LinkButton>
                         </div>

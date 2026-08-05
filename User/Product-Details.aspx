@@ -3,135 +3,93 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
         /* ═══════════════════════════════════════════
-           PRODUCT DETAILS — FULL REDESIGN
-           CozaStore India Edition
+           PRODUCT DETAILS — PREMIUM UI REDESIGN
+           CozaStore Modern Edition
         ═══════════════════════════════════════════ */
 
-        /* ---------- Page Background ---------- */
+        /* ---------- Page Background & Navbar Clearance ---------- */
         .pd-page {
-            background: #f7f8fc;
-            padding: 0 0 80px;
-        }
-
-        /* ---------- Hero Breadcrumb Strip ---------- */
-        .pd-hero-strip {
-            background: #222;
-            padding: 28px 0;
-            margin-bottom: 45px;
-        }
-
-        .pd-hero-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .pd-hero-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 20px;
-            font-weight: 600;
-            color: #fff;
-            margin: 0;
-            letter-spacing: 0.5px;
-        }
-
-        .pd-breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-        }
-
-        .pd-breadcrumb a {
-            color: rgba(255,255,255,0.6);
-            text-decoration: none;
-            transition: color 0.25s;
-        }
-
-        .pd-breadcrumb a:hover { color: #fff; }
-
-        .pd-breadcrumb .sep {
-            color: rgba(255,255,255,0.3);
-            font-size: 10px;
-        }
-
-        .pd-breadcrumb .current {
-            color: #717fe0;
-            font-weight: 600;
+            background: linear-gradient(180deg, #f8f9fd 0%, #ffffff 100%);
+            padding: 50px 0 90px; /* 50px top padding below header-v4 */
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
         }
 
         /* ---------- Main Grid ---------- */
         .pd-grid {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 50px;
             align-items: start;
         }
 
         /* ═══════════════════════════════════════════
-           LEFT COLUMN — IMAGE GALLERY
+           LEFT COLUMN — IMAGE GALLERY SHOWCASE
         ═══════════════════════════════════════════ */
         .pd-gallery {
             position: sticky;
-            top: 30px;
+            top: 140px;
         }
 
         .pd-img-frame {
-            background: #fff;
-            border-radius: 20px;
-            border: 1px solid #eee;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            background: #ffffff;
+            border-radius: 24px;
+            border: 1px solid rgba(230, 233, 245, 0.9);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(113, 127, 224, 0.04);
             overflow: hidden;
-            padding: 20px;
+            padding: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 560px;
+            min-height: 540px;
             position: relative;
-            transition: box-shadow 0.3s;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .pd-img-frame:hover {
-            box-shadow: 0 12px 40px rgba(113,127,224,0.12);
+            box-shadow: 0 28px 55px rgba(113, 127, 224, 0.14), 0 8px 20px rgba(0, 0, 0, 0.06);
+            border-color: rgba(113, 127, 224, 0.35);
         }
 
-        /* Status ribbon */
+        /* Status Ribbon */
         .pd-ribbon {
             position: absolute;
-            top: 20px;
-            left: 20px;
-            background: #e8faf0;
-            color: #00a86b;
-            font-size: 11px;
+            top: 24px;
+            left: 24px;
+            background: linear-gradient(135deg, #e6f9f0 0%, #d1f7e4 100%);
+            color: #059669;
+            font-size: 12px;
             font-weight: 700;
-            letter-spacing: 0.8px;
+            letter-spacing: 0.6px;
             text-transform: uppercase;
-            padding: 5px 14px;
-            border-radius: 6px;
+            padding: 7px 16px;
+            border-radius: 30px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 7px;
             z-index: 2;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.12);
         }
 
-        .pd-ribbon i { font-size: 13px; }
+        .pd-ribbon i { 
+            font-size: 13px; 
+            color: #10b981;
+        }
 
         .pd-main-image {
             width: 100%;
-            height: 500px;
+            height: 480px;
             object-fit: contain;
-            border-radius: 12px;
-            transition: transform 0.4s cubic-bezier(0.25,0.8,0.25,1);
+            border-radius: 16px;
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.03));
         }
 
-        .pd-main-image:hover {
-            transform: scale(1.03);
+        .pd-img-frame:hover .pd-main-image {
+            transform: scale(1.04);
         }
 
         /* ═══════════════════════════════════════════
@@ -140,34 +98,33 @@
         .pd-info {
             display: flex;
             flex-direction: column;
-            gap: 0;
         }
 
-        /* Section label (NAME, DESCRIPTION, PRICE) */
+        /* Section label tags */
         .pd-section-tag {
             font-family: 'Poppins', sans-serif;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 1.8px;
             text-transform: uppercase;
             color: #717fe0;
-            background: rgba(113,127,224,0.08);
-            padding: 4px 12px;
-            border-radius: 4px;
+            background: rgba(113, 127, 224, 0.1);
+            padding: 5px 14px;
+            border-radius: 6px;
             display: inline-block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             width: fit-content;
         }
 
         /* Product Name */
         .pd-product-name {
             font-family: 'Poppins', sans-serif;
-            font-size: 32px;
+            font-size: 34px;
             font-weight: 700;
-            color: #222;
+            color: #1a1a24;
             line-height: 1.25;
-            margin: 0 0 20px;
-            letter-spacing: -0.3px;
+            margin: 4px 0 22px;
+            letter-spacing: -0.4px;
         }
 
         /* Description */
@@ -177,92 +134,104 @@
 
         .pd-desc-text {
             font-family: 'Poppins', sans-serif;
-            font-size: 14px;
+            font-size: 15px;
             line-height: 1.8;
-            color: #666;
-            margin: 0;
+            color: #555566;
+            margin: 4px 0 0;
         }
 
         /* Separator */
         .pd-sep {
             border: none;
-            border-top: 1px solid #eee;
-            margin: 20px 0;
+            border-top: 1px solid #edf0f7;
+            margin: 22px 0;
         }
 
-        /* ---------- Price Block ---------- */
+        /* ---------- Price Card ---------- */
         .pd-price-card {
-            background: linear-gradient(135deg, #fafbff 0%, #f0f2ff 100%);
-            border: 1px solid rgba(113,127,224,0.15);
-            border-radius: 14px;
-            padding: 20px 24px;
+            background: linear-gradient(135deg, #f7f8ff 0%, #eef0fc 100%);
+            border: 1px solid rgba(113, 127, 224, 0.2);
+            border-radius: 18px;
+            padding: 22px 28px;
             margin-bottom: 28px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 14px;
+            box-shadow: 0 8px 24px rgba(113, 127, 224, 0.08);
         }
 
         .pd-price-left {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 4px;
         }
 
         .pd-price-amount {
             display: flex;
             align-items: baseline;
-            gap: 3px;
+            gap: 4px;
         }
 
         .pd-rupee {
             font-family: 'Poppins', sans-serif;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
             color: #717fe0;
         }
 
         .pd-price-num {
             font-family: 'Poppins', sans-serif;
-            font-size: 36px;
+            font-size: 38px;
             font-weight: 800;
-            color: #222;
+            color: #1a1a24;
             letter-spacing: -1px;
             line-height: 1;
         }
 
         .pd-price-tag {
-            font-size: 11px;
-            color: #999;
+            font-size: 12px;
+            color: #666677;
             font-weight: 500;
+            background: #ffffff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
         }
 
-        /* ---------- Quantity ---------- */
+        /* ---------- Quantity Block ---------- */
         .pd-qty-block {
-            margin-bottom: 24px;
+            margin-bottom: 28px;
+            background: #ffffff;
+            border: 1px solid #edf0f7;
+            border-radius: 18px;
+            padding: 20px 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
         }
 
         .pd-qty-row {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 20px;
             flex-wrap: wrap;
+            margin-top: 8px;
         }
 
         .pd-qty-pill {
             display: inline-flex;
             align-items: center;
-            border: 2px solid #e5e5e5;
+            border: 2px solid #e2e8f0;
             border-radius: 50px;
-            background: #fff;
+            background: #ffffff;
             overflow: hidden;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
         }
 
-        .pd-qty-pill:focus-within {
+        .pd-qty-pill:focus-within,
+        .pd-qty-pill:hover {
             border-color: #717fe0;
-            box-shadow: 0 0 0 3px rgba(113,127,224,0.1);
+            box-shadow: 0 0 0 4px rgba(113, 127, 224, 0.15);
         }
 
         .pd-qty-btn {
@@ -270,11 +239,11 @@
             height: 48px;
             border: none;
             background: transparent;
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
-            color: #333;
+            color: #2d3748;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -282,61 +251,66 @@
 
         .pd-qty-btn:hover {
             background: #717fe0;
-            color: #fff;
+            color: #ffffff;
         }
 
-        .pd-qty-btn:active { transform: scale(0.9); }
+        .pd-qty-btn:active { 
+            transform: scale(0.92); 
+        }
 
         .pd-qty-input {
-            width: 60px;
+            width: 64px;
             height: 48px;
             border: none;
-            border-left: 1px solid #e5e5e5;
-            border-right: 1px solid #e5e5e5;
-            background: #fafafa;
+            border-left: 1px solid #e2e8f0;
+            border-right: 1px solid #e2e8f0;
+            background: #f8fafc;
             text-align: center;
             font-family: 'Poppins', sans-serif;
-            font-size: 17px;
+            font-size: 18px;
             font-weight: 700;
-            color: #222;
+            color: #1a202c;
             outline: none;
             -moz-appearance: textfield;
         }
 
         .pd-qty-input::-webkit-inner-spin-button,
-        .pd-qty-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+        .pd-qty-input::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+        }
 
-        /* ---------- Total Chip ---------- */
+        /* Total Price Display Chip */
         .pd-total-chip {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            background: #fff;
+            gap: 8px;
+            background: linear-gradient(135deg, #ffffff 0%, #f4f6fc 100%);
             border: 2px solid #717fe0;
-            padding: 10px 20px;
+            padding: 10px 22px;
             border-radius: 50px;
+            box-shadow: 0 4px 14px rgba(113, 127, 224, 0.18);
         }
 
         .pd-total-label {
             font-family: 'Poppins', sans-serif;
             font-size: 12px;
-            font-weight: 600;
-            color: #888;
+            font-weight: 700;
+            color: #64748b;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
         }
 
         .pd-total-amount {
             font-family: 'Poppins', sans-serif;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 800;
             color: #717fe0;
         }
 
-        /* ---------- Message ---------- */
+        /* ---------- Server Message Area ---------- */
         .pd-msg-area {
-            min-height: 30px;
-            margin-bottom: 18px;
+            min-height: 28px;
+            margin-bottom: 16px;
         }
 
         .pd-msg-text {
@@ -348,22 +322,30 @@
             display: inline-block;
         }
 
-        /* ---------- Add to Cart Button ---------- */
+        /* ---------- Add To Cart & Navigation Actions ---------- */
+        .pd-action-group {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        /* Vibrant High-Impact CTA Button */
         .pd-cart-btn {
             width: 100%;
-            height: 58px;
+            height: 60px;
             border: none;
-            border-radius: 14px;
-            background: #222;
-            color: #fff;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #717fe0 0%, #5b69db 100%);
+            color: #ffffff;
             font-family: 'Poppins', sans-serif;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 700;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.25,0.8,0.25,1);
-            box-shadow: 0 8px 20px rgba(34,34,34,0.18);
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 10px 25px rgba(113, 127, 224, 0.38);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -371,36 +353,33 @@
         }
 
         .pd-cart-btn:hover {
-            background: #717fe0;
-            box-shadow: 0 12px 28px rgba(113,127,224,0.35);
-            transform: translateY(-2px);
+            background: linear-gradient(135deg, #5b69db 0%, #4856c9 100%);
+            box-shadow: 0 16px 36px rgba(113, 127, 224, 0.55);
+            transform: translateY(-3px);
         }
 
-        /* ---------- Navigation Action Buttons ---------- */
-        .pd-action-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 24px;
+        .pd-cart-btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(113, 127, 224, 0.4);
         }
 
         .pd-nav-btn-row {
             display: flex;
-            gap: 12px;
+            gap: 14px;
         }
 
         .pd-continue-btn {
             flex: 1;
-            height: 48px;
+            height: 50px;
             border: 2px solid #222222;
-            border-radius: 12px;
+            border-radius: 14px;
             background: #222222;
             color: #ffffff !important;
             font-family: 'Poppins', sans-serif;
             font-size: 13px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
             text-decoration: none !important;
             display: flex;
             align-items: center;
@@ -414,21 +393,21 @@
             border-color: #717fe0;
             color: #ffffff !important;
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(113, 127, 224, 0.25);
+            box-shadow: 0 8px 20px rgba(113, 127, 224, 0.3);
         }
 
         .pd-viewcart-btn {
             flex: 1;
-            height: 48px;
-            border: 2px solid #e6e6e6;
-            border-radius: 12px;
-            background: #ffffff;
-            color: #222222 !important;
+            height: 50px;
+            border: 2px solid #717fe0;
+            border-radius: 14px;
+            background: rgba(113, 127, 224, 0.06);
+            color: #717fe0 !important;
             font-family: 'Poppins', sans-serif;
             font-size: 13px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
             text-decoration: none !important;
             display: flex;
             align-items: center;
@@ -438,49 +417,38 @@
         }
 
         .pd-viewcart-btn:hover {
-            background: #f8f9fa;
-            border-color: #717fe0;
-            color: #717fe0 !important;
+            background: #717fe0;
+            color: #ffffff !important;
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 8px 20px rgba(113, 127, 224, 0.35);
         }
 
-        @media (max-width: 500px) {
-            .pd-nav-btn-row {
-                flex-direction: column;
-            }
-        }
-
-        .pd-cart-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 4px 12px rgba(113,127,224,0.2);
-        }
-
-        /* ---------- Feature Highlights ---------- */
+        /* ---------- Feature Badges ---------- */
         .pd-features {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-top: 28px;
+            gap: 14px;
+            margin-top: 10px;
         }
 
         .pd-feature-item {
-            background: #fff;
-            border: 1px solid #eee;
-            border-radius: 12px;
-            padding: 16px 12px;
+            background: #ffffff;
+            border: 1px solid #edf0f7;
+            border-radius: 16px;
+            padding: 18px 14px;
             text-align: center;
-            transition: all 0.25s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
         }
 
         .pd-feature-item:hover {
-            border-color: #717fe0;
-            box-shadow: 0 4px 15px rgba(113,127,224,0.1);
-            transform: translateY(-2px);
+            border-color: rgba(113, 127, 224, 0.4);
+            box-shadow: 0 8px 24px rgba(113, 127, 224, 0.15);
+            transform: translateY(-3px);
         }
 
         .pd-feature-item i {
-            font-size: 22px;
+            font-size: 24px;
             color: #717fe0;
             display: block;
             margin-bottom: 8px;
@@ -488,19 +456,19 @@
 
         .pd-feature-item span {
             font-family: 'Poppins', sans-serif;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
-            color: #555;
-            line-height: 1.4;
+            color: #4a5568;
+            line-height: 1.45;
             display: block;
         }
 
         /* ═══════════════════════════════════════════
-           TOAST NOTIFICATIONS (Edit Category Style)
+           TOAST NOTIFICATIONS (UNTOUCHED / PRESERVED)
         ═══════════════════════════════════════════ */
         .pd-toast-container {
             position: fixed;
-            top: 28px;
+            top: 100px;
             right: 28px;
             z-index: 999999;
             display: flex;
@@ -582,28 +550,30 @@
         /* ═══════════════════════════════════════════
            RESPONSIVE BREAKPOINTS
         ═══════════════════════════════════════════ */
-        @media (max-width: 900px) {
+        @media (max-width: 992px) {
+            .pd-page { padding: 40px 0 70px; }
             .pd-grid {
                 grid-template-columns: 1fr;
-                gap: 25px;
+                gap: 35px;
             }
 
             .pd-gallery { position: static; }
-
-            .pd-img-frame { min-height: 350px; }
-            .pd-main-image { height: 320px; }
-
-            .pd-product-name { font-size: 26px; }
-            .pd-price-num { font-size: 30px; }
-
-            .pd-hero-inner { flex-direction: column; gap: 8px; text-align: center; }
-
-            .pd-features { grid-template-columns: 1fr 1fr 1fr; }
+            .pd-img-frame { min-height: 400px; }
+            .pd-main-image { height: 380px; }
+            .pd-product-name { font-size: 28px; }
+            .pd-price-num { font-size: 32px; }
         }
 
-        @media (max-width: 500px) {
+        @media (max-width: 576px) {
+            .pd-page { padding: 30px 0 60px; }
+            .pd-grid { padding: 0 16px; }
+            .pd-img-frame { min-height: 300px; padding: 18px; }
+            .pd-main-image { height: 280px; }
+            .pd-product-name { font-size: 24px; }
             .pd-features { grid-template-columns: 1fr; }
-            .pd-info { padding: 0; }
+            .pd-nav-btn-row { flex-direction: column; }
+            .pd-toast-container { top: 90px; right: 16px; left: 16px; }
+            .pd-toast { min-width: unset; width: 100%; max-width: 100%; }
         }
     </style>
 </asp:Content>
@@ -619,24 +589,10 @@
 
             <div class="pd-page">
 
-                <!-- ═══ Dark Hero Breadcrumb Bar ═══ -->
-                <div class="pd-hero-strip">
-                    <div class="pd-hero-inner">
-                        <h2 class="pd-hero-title">Product Details</h2>
-                        <div class="pd-breadcrumb">
-                            <a href="uindex.aspx">Home</a>
-                            <span class="sep"><i class="fa fa-angle-right"></i></span>
-                            <a href="Product.aspx">Shop</a>
-                            <span class="sep"><i class="fa fa-angle-right"></i></span>
-                            <span class="current">Details</span>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- ═══ Two-Column Product Grid ═══ -->
                 <div class="pd-grid">
 
-                    <!-- LEFT — Large Product Image -->
+                    <!-- LEFT — Large Product Image Showcase -->
                     <div class="pd-gallery">
                         <div class="pd-img-frame">
                             <span class="pd-ribbon"><i class="fa fa-check-circle"></i> In Stock</span>
@@ -747,7 +703,7 @@
         /**
          * showPdToast(title, message, type)
          * type: 'success' | 'error'
-         * Mirrors the Admin Edit Category toast popup style
+         * Preserved original toast functionality
          */
         function showPdToast(title, message, type) {
             type = type || 'success';

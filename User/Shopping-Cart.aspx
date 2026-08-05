@@ -3,106 +3,49 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
         /* ═══════════════════════════════════════════
-           COZASTORE SHOPPING CART — MATCHES WEBSITE
+           COZASTORE SHOPPING CART — MODERN UI REDESIGN
         ═══════════════════════════════════════════ */
 
+        /* ---------- Page Wrapper & Clearance ---------- */
         .coza-cart-wrapper {
-            background: #f8f9fc;
-            padding-top: 100px; /* Clears fixed header-v4 navigation bar */
-            padding-bottom: 80px;
-            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #f8f9fd 0%, #ffffff 100%);
+            padding-top: 50px; /* 50px top padding below header-v4 */
+            padding-bottom: 90px;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             min-height: 85vh;
         }
 
-        /* CozaStore Hero Breadcrumb Banner */
-        .coza-hero-strip {
-            background: #222222;
-            padding: 30px 0;
-            margin-bottom: 40px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-        }
-
-        .coza-hero-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .coza-hero-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 22px;
-            font-weight: 700;
-            color: #ffffff;
-            margin: 0;
-            letter-spacing: 0.5px;
-        }
-
-        .coza-breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-        }
-
-        .coza-breadcrumb a {
-            color: rgba(255,255,255,0.65);
-            text-decoration: none;
-            transition: color 0.25s ease;
-        }
-
-        .coza-breadcrumb a:hover {
-            color: #ffffff;
-        }
-
-        .coza-breadcrumb .sep {
-            color: rgba(255,255,255,0.3);
-            font-size: 11px;
-        }
-
-        .coza-breadcrumb .current {
-            color: #717fe0;
-            font-weight: 600;
-        }
-
-        /* Cart Grid Layout */
         .coza-cart-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
         .coza-cart-grid {
             display: grid;
             grid-template-columns: 1fr 380px;
-            gap: 30px;
+            gap: 36px;
             align-items: start;
         }
 
-        @media (max-width: 992px) {
-            .coza-cart-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Left Main Cart Section */
+        /* ═══════════════════════════════════════════
+           LEFT COLUMN — CART ITEMS LIST (DATALIST)
+        ═══════════════════════════════════════════ */
         .coza-cart-card {
             background: #ffffff;
-            border-radius: 16px;
-            border: 1px solid #eef0f6;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(230, 233, 245, 0.9);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
             padding: 28px;
         }
 
         .coza-cart-card-title {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
-            color: #222222;
-            margin: 0 0 20px;
-            padding-bottom: 14px;
-            border-bottom: 2px solid #f0f2f5;
+            color: #1a1a24;
+            margin: 0 0 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #f0f2f7;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -110,43 +53,73 @@
 
         .coza-cart-card-title i {
             color: #717fe0;
-            margin-right: 8px;
+            margin-right: 10px;
+        }
+
+        /* Column Header Strip */
+        .coza-cart-table-head {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 16px;
+            padding: 12px 18px;
+            background: #f8fafc;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #64748b;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .coza-cart-table-head span:nth-child(2),
+        .coza-cart-table-head span:nth-child(3),
+        .coza-cart-table-head span:nth-child(4) {
+            text-align: center;
         }
 
         /* Cart Item Row */
         .coza-cart-item {
-            display: flex;
-            gap: 24px;
-            padding: 24px 0;
-            border-bottom: 1px solid #f0f2f5;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 16px;
+            padding: 24px 12px;
+            border-bottom: 1px solid #f0f2f7;
             align-items: center;
-            transition: background 0.2s ease;
+            transition: background 0.25s ease;
         }
 
         .coza-cart-item:last-child {
             border-bottom: none;
         }
 
-        /* Product Image (Large 200px x 200px) */
+        /* Product Left Details */
+        .coza-product-col {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         .coza-cart-img-wrap {
-            width: 200px !important;
-            min-width: 200px !important;
-            height: 200px !important;
-            border-radius: 14px !important;
-            border: 1px solid #eef0f6 !important;
+            width: 110px !important;
+            min-width: 110px !important;
+            height: 110px !important;
+            border-radius: 16px !important;
+            border: 1px solid #edf0f7 !important;
             background: #ffffff !important;
-            padding: 10px !important;
+            padding: 8px !important;
             flex-shrink: 0 !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
             box-shadow: 0 4px 14px rgba(0,0,0,0.03) !important;
             overflow: hidden !important;
-            transition: transform 0.25s ease, border-color 0.25s ease !important;
+            transition: all 0.3s ease !important;
         }
 
         .coza-cart-item:hover .coza-cart-img-wrap {
             border-color: #717fe0 !important;
+            box-shadow: 0 8px 20px rgba(113, 127, 224, 0.15) !important;
             transform: translateY(-2px) !important;
         }
 
@@ -160,25 +133,23 @@
             margin: 0 auto !important;
         }
 
-        /* Item Info Section */
         .coza-cart-info {
-            flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
         }
 
         .coza-product-name {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 700;
-            color: #222222;
+            color: #1a1a24;
             margin: 0;
-            line-height: 1.3;
+            line-height: 1.35;
         }
 
         .coza-product-desc {
             font-size: 13px;
-            color: #777777;
+            color: #64748b;
             margin: 0;
             line-height: 1.4;
         }
@@ -187,47 +158,75 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
-            color: #e53e3e;
-            background: #fff5f5;
-            border: 1px solid #fed7d7;
+            color: #d97706;
+            background: #fffbe6;
+            border: 1px solid #fef3c7;
             padding: 3px 10px;
             border-radius: 20px;
             width: fit-content;
             margin-top: 4px;
         }
 
-        /* Quantity & Action Row */
-        .coza-action-bar {
+        /* Unit Price Column */
+        .coza-cart-price-col {
+            text-align: center;
+        }
+
+        .coza-price-val {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a24;
             display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-top: 12px;
+            align-items: baseline;
+            justify-content: center;
+            gap: 3px;
+        }
+
+        .coza-price-rupee {
+            color: #717fe0;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .coza-price-unit {
+            font-size: 11px;
+            font-weight: 500;
+            color: #94a3b8;
+            margin-left: 2px;
+        }
+
+        /* Quantity Column */
+        .coza-qty-col {
+            display: flex;
+            justify-content: center;
         }
 
         .coza-qty-pill {
             display: inline-flex;
             align-items: center;
-            border: 2px solid #e6e6e6;
+            border: 2px solid #e2e8f0;
             border-radius: 40px;
             background: #ffffff;
             overflow: hidden;
-            transition: border-color 0.25s ease;
+            transition: all 0.25s ease;
         }
 
-        .coza-qty-pill:hover {
+        .coza-qty-pill:hover,
+        .coza-qty-pill:focus-within {
             border-color: #717fe0;
+            box-shadow: 0 0 0 3px rgba(113, 127, 224, 0.12);
         }
 
         .coza-qty-btn {
-            width: 34px;
-            height: 34px;
+            width: 36px;
+            height: 36px;
             border: none;
             background: transparent;
             font-size: 16px;
             font-weight: 700;
-            color: #333;
+            color: #334155;
             cursor: pointer;
             transition: background 0.2s, color 0.2s;
             display: flex;
@@ -240,32 +239,41 @@
             color: #ffffff;
         }
 
+        .coza-qty-btn:active {
+            transform: scale(0.92);
+        }
+
         .coza-qty-input {
-            width: 40px;
-            height: 34px;
+            width: 42px;
+            height: 36px;
             border: none;
-            border-left: 1px solid #e6e6e6;
-            border-right: 1px solid #e6e6e6;
-            background: #fafafa;
+            border-left: 1px solid #e2e8f0;
+            border-right: 1px solid #e2e8f0;
+            background: #f8fafc;
             text-align: center;
             font-family: 'Poppins', sans-serif;
             font-size: 14px;
             font-weight: 700;
-            color: #222222;
+            color: #1e293b;
             outline: none;
         }
 
-        /* Delete Button Link */
+        /* Action Column (Remove Button) */
+        .coza-action-col {
+            text-align: center;
+        }
+
         .coza-delete-btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 6px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             color: #ef4444;
             background: #fff5f5;
             border: 1px solid #fee2e2;
-            padding: 6px 14px;
+            padding: 8px 14px;
             border-radius: 20px;
             text-decoration: none !important;
             transition: all 0.25s ease;
@@ -276,60 +284,45 @@
             background: #ef4444;
             color: #ffffff;
             border-color: #ef4444;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
         }
 
-        /* Item Price Column */
-        .coza-cart-price-col {
-            text-align: right;
-            min-width: 110px;
-        }
-
-        .coza-price-val {
-            font-size: 19px;
-            font-weight: 700;
-            color: #222222;
-        }
-
-        .coza-price-val span {
-            color: #717fe0;
-            font-size: 16px;
-            margin-right: 2px;
-        }
-
-        /* Sidebar Summary Card */
+        /* ═══════════════════════════════════════════
+           RIGHT COLUMN — ORDER SUMMARY SIDEBAR
+        ═══════════════════════════════════════════ */
         .coza-summary-card {
             background: #ffffff;
-            border-radius: 16px;
-            border: 1px solid #eef0f6;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-            padding: 26px;
+            border-radius: 20px;
+            border: 1px solid rgba(230, 233, 245, 0.9);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
+            padding: 28px;
             position: sticky;
-            top: 110px;
+            top: 140px;
         }
 
         .coza-summary-title {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
-            color: #222222;
-            margin: 0 0 20px;
-            padding-bottom: 14px;
-            border-bottom: 2px solid #f0f2f5;
+            color: #1a1a24;
+            margin: 0 0 22px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #f0f2f7;
         }
 
         .coza-summary-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             font-size: 14px;
-            color: #666666;
+            color: #64748b;
         }
 
         .coza-summary-total {
-            margin-top: 20px;
-            padding-top: 16px;
-            border-top: 2px dashed #eef0f6;
+            margin-top: 22px;
+            padding-top: 18px;
+            border-top: 2px dashed #e2e8f0;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -338,66 +331,91 @@
         .coza-summary-total-label {
             font-size: 16px;
             font-weight: 700;
-            color: #222222;
+            color: #1a1a24;
         }
 
         .coza-summary-total-val {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 800;
             color: #717fe0;
+            display: flex;
+            align-items: baseline;
+            gap: 2px;
         }
 
-        /* CozaStore Main Action Button */
+        /* Vibrant Brand Checkout CTA Button */
         .coza-checkout-btn {
             width: 100%;
-            height: 50px;
+            height: 56px;
             border: none;
-            border-radius: 30px;
-            background: #222222;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #717fe0 0%, #5b69db 100%);
             color: #ffffff;
             font-family: 'Poppins', sans-serif;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
             cursor: pointer;
-            margin-top: 22px;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 18px rgba(34,34,34,0.15);
+            margin-top: 24px;
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 10px 25px rgba(113, 127, 224, 0.38);
         }
 
         .coza-checkout-btn:hover {
-            background: #717fe0;
-            box-shadow: 0 10px 25px rgba(113,127,224,0.35);
-            transform: translateY(-2px);
+            background: linear-gradient(135deg, #5b69db 0%, #4856c9 100%);
+            box-shadow: 0 16px 36px rgba(113, 127, 224, 0.55);
+            transform: translateY(-3px);
         }
 
-        /* Alert Banners */
-        .coza-alert-banner {
-            margin-top: 15px;
-            padding: 12px 16px;
-            border-radius: 8px;
+        .coza-checkout-btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(113, 127, 224, 0.4);
+        }
+
+        /* Secondary Continue Shopping Button */
+        .coza-continue-shopping-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            height: 48px;
+            margin-top: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 14px;
+            background: #ffffff;
+            color: #475569 !important;
+            font-family: 'Poppins', sans-serif;
             font-size: 13px;
-            font-weight: 600;
-            background: #fff5f5;
-            color: #c53030;
-            border: 1px solid #feb2b2;
-            display: block;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            text-decoration: none !important;
+            transition: all 0.3s ease;
         }
 
-        /* Large Empty Cart Banner (Neutral & Premium - No Red) */
+        .coza-continue-shopping-btn:hover {
+            background: #f8fafc;
+            border-color: #717fe0;
+            color: #717fe0 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(113, 127, 224, 0.15);
+        }
+
+        /* Empty Cart State */
         .coza-empty-cart-banner {
             background: #ffffff;
-            border: 2px dashed #e2e8f0;
-            border-radius: 16px;
-            padding: 55px 30px;
+            border: 2px dashed #cbd5e1;
+            border-radius: 20px;
+            padding: 60px 30px;
             text-align: center;
             font-family: 'Poppins', sans-serif;
             font-size: 22px;
             font-weight: 700;
-            color: #222222;
+            color: #1e293b;
             margin: 20px 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
             display: block;
             width: 100%;
         }
@@ -405,14 +423,16 @@
         .coza-empty-cart-banner::before {
             content: "\f07a"; /* FontAwesome Shopping Cart Icon */
             font-family: 'FontAwesome';
-            font-size: 54px;
+            font-size: 56px;
             color: #717fe0;
             display: block;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             font-weight: normal;
         }
 
-        /* Toast Container */
+        /* ═══════════════════════════════════════════
+           TOAST NOTIFICATIONS (UNTOUCHED / PRESERVED)
+        ═══════════════════════════════════════════ */
         .pd-toast-container {
             position: fixed;
             top: 100px;
@@ -496,18 +516,46 @@
 
         @keyframes toastBar { from { transform: scaleX(1); } to { transform: scaleX(0); } }
 
+        /* ═══════════════════════════════════════════
+           RESPONSIVE BREAKPOINTS
+        ═══════════════════════════════════════════ */
+        @media (max-width: 992px) {
+            .coza-cart-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .coza-summary-card { position: static; }
+        }
+
         @media (max-width: 768px) {
+            .coza-cart-wrapper { padding-top: 35px; }
+            .pd-toast-container { top: 90px; right: 16px; left: 16px; }
+            .pd-toast { min-width: unset; width: 100%; max-width: 100%; }
+
+            .coza-cart-table-head { display: none; }
+
             .coza-cart-item {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 20px 0;
+            }
+
+            .coza-product-col {
                 flex-direction: column;
-                align-items: flex-start;
+                text-align: center;
             }
+
             .coza-cart-img-wrap {
-                width: 140px;
-                height: 140px;
-                margin: 0 auto;
+                width: 140px !important;
+                height: 140px !important;
             }
-            .coza-cart-price-col {
-                text-align: left;
+
+            .coza-cart-price-col,
+            .coza-qty-col,
+            .coza-action-col {
+                text-align: center;
+                justify-content: center;
             }
         }
     </style>
@@ -515,15 +563,14 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <%-- ScriptManager on top --%>
+    <%# Eval("Product_stock") %>
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
 
-    <%-- UpdatePanel wraps everything so button clicks don't reload full page --%>
+    <%-- Hidden fields --%>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
 
             <div class="coza-cart-wrapper">
-
 
                 <!-- Main Content Container -->
                 <div class="coza-cart-container">
@@ -532,7 +579,15 @@
                         <!-- Left Column: Cart Items List -->
                         <div class="coza-cart-card">
                             <div class="coza-cart-card-title">
-                                <span><i class="fa fa-shopping-bag"></i> Cart Items</span>
+                                <span><i class="fa fa-shopping-bag"></i> Shopping Cart Items</span>
+                            </div>
+
+                            <!-- Column Header Strip -->
+                            <div class="coza-cart-table-head">
+                                <span>Item Details</span>
+                                <span>Unit Price</span>
+                                <span>Quantity</span>
+                                <span>Action</span>
                             </div>
 
                             <%-- DataList for Cart Items --%>
@@ -540,38 +595,43 @@
                                 <ItemTemplate>
                                     <div class="coza-cart-item">
 
-                                        <!-- Product Image (120px x 120px) -->
-                                        <div class="coza-cart-img-wrap">
-                                            <asp:Image ID="imgp" runat="server" ImageUrl='<%# ResolveUrl(Eval("Product_image").ToString()) %>' AlternateText="Product Image" />
-                                        </div>
-
-                                        <!-- Product Details & Controls -->
-                                        <div class="coza-cart-info">
-                                            <asp:Label ID="lblname" runat="server" Text='<%# Eval("Product_name") %>' CssClass="coza-product-name"></asp:Label>
-                                            <asp:Label ID="Label4" runat="server" Text='<%# Eval("Product_description") %>' CssClass="coza-product-desc"></asp:Label>
-                                            
-                                            <div class="coza-stock-tag">
-                                                <i class="fa fa-cubes"></i> Only <%# Eval("Product_stock") %> left in stock
+                                        <!-- Product Image & Description Column -->
+                                        <div class="coza-product-col">
+                                            <div class="coza-cart-img-wrap">
+                                                <asp:Image ID="imgp" runat="server" ImageUrl='<%# ResolveUrl(Eval("Product_image").ToString()) %>' AlternateText="Product Image" />
                                             </div>
 
-                                            <!-- Qty & Delete Row -->
-                                            <div class="coza-action-bar">
-                                                <div class="coza-qty-pill">
-                                                    <asp:Button ID="btnminus" runat="server" OnClick="btnminus_Click" Text="&#8722;" CssClass="coza-qty-btn" ToolTip="Decrease Quantity" />
-                                                    <asp:TextBox ID="txtbQty" runat="server" ReadOnly="True" Text='<%# Eval("Quantity") %>' CssClass="coza-qty-input"></asp:TextBox>
-                                                    <asp:Button ID="btnplus" runat="server" OnClick="btnplus_Click" Text="+" CssClass="coza-qty-btn" ToolTip="Increase Quantity" />
+                                            <div class="coza-cart-info">
+                                                <asp:Label ID="lblname" runat="server" Text='<%# Eval("Product_name") %>' CssClass="coza-product-name"></asp:Label>
+                                                <asp:Label ID="Label4" runat="server" Text='<%# Eval("Product_description") %>' CssClass="coza-product-desc" Visible="false"></asp:Label>
+                                                
+                                                <div class="coza-stock-tag">
+                                                    <i class="fa fa-cubes"></i> Only <%# Eval("Product_stock") %> left in stock
                                                 </div>
-
-                                                <!-- Delete Button -->
-                                                <asp:Button ID="btndelete" runat="server" OnClick="btndelete_Click" CommandArgument='<%# Eval("Product_id") %>' Text="Remove" CssClass="coza-delete-btn" ToolTip="Remove product from cart" />
                                             </div>
                                         </div>
 
-                                        <!-- Item Price -->
+                                        <!-- Unit Price Column -->
                                         <div class="coza-cart-price-col">
                                             <div class="coza-price-val">
-                                                <span>&#x20B9;</span><asp:Label ID="lblprice" runat="server" Text='<%# Eval("Product_price") %>'></asp:Label>
+                                                <span class="coza-price-rupee">&#x20B9;</span>
+                                                <asp:Label ID="lblprice" runat="server" Text='<%# Eval("Product_price") %>'></asp:Label>
+                                                <span class="coza-price-unit">/ Item</span>
                                             </div>
+                                        </div>
+
+                                        <!-- Quantity Selector Column -->
+                                        <div class="coza-qty-col">
+                                            <div class="coza-qty-pill">
+                                                <asp:Button ID="btnminus" runat="server" OnClick="btnminus_Click" Text="&#8722;" CssClass="coza-qty-btn" ToolTip="Decrease Quantity" />
+                                                <asp:TextBox ID="txtbQty" runat="server" ReadOnly="True" Text='<%# Eval("Quantity") %>' CssClass="coza-qty-input"></asp:TextBox>
+                                                <asp:Button ID="btnplus" runat="server" OnClick="btnplus_Click" Text="+" CssClass="coza-qty-btn" ToolTip="Increase Quantity" />
+                                            </div>
+                                        </div>
+
+                                        <!-- Action Column (Remove Button) -->
+                                        <div class="coza-action-col">
+                                            <asp:Button ID="btndelete" runat="server" OnClick="btndelete_Click" CommandArgument='<%# Eval("Product_id") %>' Text="Remove" CssClass="coza-delete-btn" ToolTip="Remove product from cart" />
                                         </div>
 
                                         <%-- Hidden fields --%>
@@ -595,19 +655,24 @@
 
                             <div class="coza-summary-row">
                                 <span>Shipping</span>
-                                <span style="color:#22c55e; font-weight:600;"><i class="fa fa-truck"></i> Free Shipping</span>
+                                <span style="color:#10b981; font-weight:600;"><i class="fa fa-truck"></i> Free Shipping</span>
                             </div>
 
                             <div class="coza-summary-total">
                                 <asp:Label ID="Label5" runat="server" Text="Total Amount" CssClass="coza-summary-total-label"></asp:Label>
                                 <div class="coza-summary-total-val">
-                                    <span>&#x20B9;</span><asp:Label ID="lblTotal" runat="server" Text="0"></asp:Label>
+                                    <span style="font-size:20px; font-weight:700;">&#x20B9;</span>
+                                    <asp:Label ID="lblTotal" runat="server" Text="0"></asp:Label>
                                 </div>
                             </div>
 
-                            <asp:Button ID="Button1" runat="server" Text="Proceed to Checkout" CssClass="coza-checkout-btn" />
+                            <asp:Button ID="btncheckout" runat="server" Text="Proceed to Checkout" CssClass="coza-checkout-btn" OnClick="btncheckout_Click" />
 
-                            <div style="margin-top:20px; text-align:center; font-size:12px; color:#888;">
+                            <a href="Product.aspx" class="coza-continue-shopping-btn">
+                                <i class="fa fa-shopping-bag"></i> Continue Shopping
+                            </a>
+
+                            <div style="margin-top:20px; text-align:center; font-size:12px; color:#64748b;">
                                 <i class="fa fa-shield" style="color:#717fe0; margin-right:5px;"></i> Safe &amp; Secure Checkout
                             </div>
                         </div>
@@ -623,6 +688,10 @@
     <div class="pd-toast-container" id="pdToastContainer"></div>
 
     <script type="text/javascript">
+        /**
+         * showPdToast(title, message, type)
+         * Preserved original toast notification script
+         */
         function showPdToast(title, message, type) {
             type = type || 'error';
             var container = document.getElementById('pdToastContainer');
