@@ -185,6 +185,7 @@
     <Content Include="product.html" />
     <Content Include="shoping-cart.html" />
     <Content Include="User\About.aspx" />
+    <Content Include="User\AddBankAcc.aspx" />
     <Content Include="User\Checkout.aspx" />
     <Content Include="User\Contact.aspx" />
     <Content Include="User\Billing.aspx" />
@@ -356,6 +357,13 @@
     </Compile>
     <Compile Include="User\About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\AddBankAcc.aspx.cs">
+      <DependentUpon>AddBankAcc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\AddBankAcc.aspx.designer.cs">
+      <DependentUpon>AddBankAcc.aspx</DependentUpon>
     </Compile>
     <Compile Include="User\Checkout.aspx.cs">
       <DependentUpon>Checkout.aspx</DependentUpon>
