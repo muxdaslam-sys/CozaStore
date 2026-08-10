@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +16,7 @@ namespace Ecom_Project.User
         {
             if(!IsPostBack)
             {
+                lblaccmsg.Visible = false;
                 int uid =Convert.ToInt32(Session["uid"]);
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = @"SELECT COUNT(*) 
@@ -29,6 +30,7 @@ namespace Ecom_Project.User
                     userdetails();
                     itemdisplay();
                     totalamount();
+                    ShowBankAccount();
                 }
                 else
                 {
@@ -38,6 +40,45 @@ namespace Ecom_Project.User
             }
         }
 
+        public void ShowBankAccount()
+        {
+
+            int uid = Convert.ToInt32(Session["uid"]);
+
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = @"
+        SELECT Account_id, Account_name, Account_number, Account_balance
+        FROM account_tab
+        WHERE User_id = @uid";
+
+            cmd.Parameters.AddWithValue("@uid", uid);
+
+            DataSet ds = ob.SP_Adapter(cmd);
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                ddlBankAcc.DataSource = ds;
+                ddlBankAcc.DataTextField = "Account_number";
+                ddlBankAcc.DataValueField = "Account_id";
+                ddlBankAcc.DataBind();
+
+                ddlBankAcc.Items.Insert(
+                    0,
+                    new ListItem("-- Select Bank Account --", "0")
+                );
+
+                AccountPanel.Visible = false;
+            }
+            else
+            {
+                lblaccmsg.Visible = true;
+                ScriptManager.RegisterStartupScript(this, GetType(), "noBankAlert", "showPdToast('Bank Account Required', 'Please Add A Bank Account', 'error');", true);
+                AccountPanel.Visible = false;
+            }
+
+
+        }
         public void userdetails()
         {
             int uid = Convert.ToInt32(Session["uid"]);
@@ -92,6 +133,12 @@ namespace Ecom_Project.User
 
         protected void btnconfirm_Click(object sender, EventArgs e)
         {
+            if (ddlBankAcc.SelectedValue == "0")
+            {
+                AccountPanel.Visible = false;
+                ScriptManager.RegisterStartupScript(this, GetType(), "selectBankAlert", "showPdToast('Bank Account Required', 'Please Choose A Bank Account', 'error');", true);
+                return;
+            }
             insert_order();
         }
         public void insert_order()
@@ -157,6 +204,44 @@ namespace Ecom_Project.User
             // Redirect
             Response.Redirect("Billing.aspx?orderGroupID=" + orderGroupID);
 
+        }
+
+        protected void btnAddNewBank_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AddBankAcc.aspx");
+        }
+
+        protected void ddlBankAcc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlBankAcc.SelectedValue == "0")
+            {
+                AccountPanel.Visible = false;
+                return;
+            }
+
+            int accountId = Convert.ToInt32(ddlBankAcc.SelectedValue);
+
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = @"
+        SELECT Account_name, Account_number, Account_balance
+        FROM account_tab
+        WHERE Account_id = @accountId";
+
+            cmd.Parameters.AddWithValue("@accountId", accountId);
+
+            DataSet ds = ob.SP_Adapter(cmd);
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                DataRow row = ds.Tables[0].Rows[0];
+
+                AccountPanel.Visible = true;
+
+                accname.Text = row["Account_name"].ToString();
+                accno.Text = row["Account_number"].ToString();
+                accbalance.Text = row["Account_balance"].ToString();
+            }
         }
     }
 }
