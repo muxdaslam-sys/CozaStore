@@ -158,7 +158,7 @@ namespace Ecom_Project.User
                     AccNo = dr["Account_number"].ToString();
                 }
                 decimal Total = Convert.ToDecimal(lbltotal.Text);
-                if (Total < Balance)
+                if (Total <= Balance)
                 {
                     PaymentService.ServiceClient ps = new PaymentService.ServiceClient();
                    int status = ps.Payment(AccNo,Total);
@@ -170,7 +170,7 @@ namespace Ecom_Project.User
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "selectBankAlert", "showPdToast('Insufficent Balance', 'You Don't Have Enough Bank Balance', 'error');", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "insufficientBalanceAlert", "showPdToast('Insufficient Balance', 'Insufficient Bank Balance', 'error');", true); 
                     return;
                 }
             }
