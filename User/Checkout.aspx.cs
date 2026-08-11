@@ -139,7 +139,41 @@ namespace Ecom_Project.User
                 ScriptManager.RegisterStartupScript(this, GetType(), "selectBankAlert", "showPdToast('Bank Account Required', 'Please Choose A Bank Account', 'error');", true);
                 return;
             }
-            insert_order();
+            else
+            {
+                int accountId = Convert.ToInt32(ddlBankAcc.SelectedValue);
+
+                SqlCommand cmd = new SqlCommand();
+
+                cmd.CommandText = @"SELECT  Account_number,Account_balance
+                                FROM account_tab WHERE Account_id = @accountId";
+
+                cmd.Parameters.AddWithValue("@accountId", accountId);
+                SqlDataReader dr = ob.SP_Reader(cmd);
+                decimal Balance = 0;
+                string AccNo = "";
+                while (dr.Read())
+                {
+                    Balance = Convert.ToDecimal( dr["Account_balance"]);
+                    AccNo = dr["Account_number"].ToString();
+                }
+                decimal Total = Convert.ToDecimal(lbltotal.Text);
+                if (Total < Balance)
+                {
+                    PaymentService.ServiceClient ps = new PaymentService.ServiceClient();
+                   int status = ps.Payment(AccNo,Total);
+                    if (status > 0)
+                    {
+                        insert_order();
+                    }
+
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "selectBankAlert", "showPdToast('Insufficent Balance', 'You Don't Have Enough Bank Balance', 'error');", true);
+                    return;
+                }
+            }
         }
         public void insert_order()
         {
@@ -202,7 +236,7 @@ namespace Ecom_Project.User
             ob.SP_nonquery(updateCmd);
 
             // Redirect
-            Response.Redirect("Billing.aspx?orderGroupID=" + orderGroupID);
+            Response.Redirect("PaymentSuccess.aspx?orderGroupID=" + orderGroupID);
 
         }
 
@@ -223,10 +257,8 @@ namespace Ecom_Project.User
 
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = @"
-        SELECT Account_name, Account_number, Account_balance
-        FROM account_tab
-        WHERE Account_id = @accountId";
+            cmd.CommandText = @"SELECT Account_name, Account_number, Account_balance
+                                FROM account_tab WHERE Account_id = @accountId";
 
             cmd.Parameters.AddWithValue("@accountId", accountId);
 
