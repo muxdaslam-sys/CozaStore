@@ -44,6 +44,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -78,6 +80,16 @@
     <Content Include="Admin\Product.aspx" />
     <Content Include="blog-detail.html" />
     <Content Include="blog.html" />
+    <Content Include="Connected Services\PaymentService\Ecom_Project.PaymentService.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\PaymentService\Service.disco" />
+    <None Include="Connected Services\PaymentService\configuration91.svcinfo" />
+    <None Include="Connected Services\PaymentService\configuration.svcinfo" />
+    <None Include="Connected Services\PaymentService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="contact.html" />
     <Content Include="css\main.css" />
     <Content Include="css\util.css" />
@@ -189,10 +201,12 @@
     <Content Include="User\Checkout.aspx" />
     <Content Include="User\Contact.aspx" />
     <Content Include="User\Billing.aspx" />
+    <Content Include="User\PaymentSuccess.aspx" />
     <Content Include="User\Product.aspx" />
     <Content Include="User\Product-Details.aspx" />
     <Content Include="User\Shopping-Cart.aspx" />
     <Content Include="User\uindex.aspx" />
+    <Content Include="User\ViewOrders.aspx" />
     <Content Include="vendor\animate\animate.css" />
     <Content Include="vendor\animsition\css\animsition.css" />
     <Content Include="vendor\animsition\css\animsition.min.css" />
@@ -329,6 +343,11 @@
       <DependentUpon>Product.aspx</DependentUpon>
     </Compile>
     <Compile Include="ConClass.cs" />
+    <Compile Include="Connected Services\PaymentService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -386,6 +405,13 @@
     <Compile Include="User\Billing.aspx.designer.cs">
       <DependentUpon>Billing.aspx</DependentUpon>
     </Compile>
+    <Compile Include="User\PaymentSuccess.aspx.cs">
+      <DependentUpon>PaymentSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\PaymentSuccess.aspx.designer.cs">
+      <DependentUpon>PaymentSuccess.aspx</DependentUpon>
+    </Compile>
     <Compile Include="User\Product.aspx.cs">
       <DependentUpon>Product.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -420,6 +446,13 @@
     </Compile>
     <Compile Include="User\User.Master.designer.cs">
       <DependentUpon>User.Master</DependentUpon>
+    </Compile>
+    <Compile Include="User\ViewOrders.aspx.cs">
+      <DependentUpon>ViewOrders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\ViewOrders.aspx.designer.cs">
+      <DependentUpon>ViewOrders.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -508,6 +541,16 @@
     <Content Include="fonts\Poppins\Poppins-Thin.ttf" />
     <Content Include="fonts\Poppins\Poppins-ThinItalic.ttf" />
     <Content Include="Admin\Admin.Master" />
+    <None Include="Connected Services\PaymentService\Service.wsdl" />
+    <None Include="Connected Services\PaymentService\Service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PaymentService\Service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PaymentService\Service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <Content Include="Site1.Master" />
     <Content Include="vendor\bootstrap\css\bootstrap-grid.css.map" />
@@ -538,6 +581,12 @@
     <Folder Include="DB-Backup\" />
     <Folder Include="Images\category\" />
     <Folder Include="Images\products\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\PaymentService\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
