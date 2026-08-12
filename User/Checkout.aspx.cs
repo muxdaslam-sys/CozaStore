@@ -164,18 +164,18 @@ namespace Ecom_Project.User
                    int status = ps.Payment(AccNo,Total);
                     if (status > 0)
                     {
-                        insert_order();
+                        Confirm_Order();
                     }
 
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "insufficientBalanceAlert", "showPdToast('Insufficient Balance', 'Insufficient Bank Balance', 'error');", true); 
+                    ScriptManager.RegisterStartupScript(this, GetType(), "insufficientBalanceAlert", "showPdToast('Insufficient Balance', 'You Don't Have Enough Balance To Purchase', 'error');", true); 
                     return;
                 }
             }
         }
-        public void insert_order()
+        public void Confirm_Order()
         {
             int uid = Convert.ToInt32(Session["uid"]);
 
@@ -201,7 +201,7 @@ namespace Ecom_Project.User
                 SqlCommand orderCmd = new SqlCommand();
 
                 orderCmd.CommandText = @"INSERT INTO Order_tab (User_id,Product_id,Quantity, SubTotal,Order_status, Order_Date, OrderGroupID)
-                                         VALUES (@uid, @pid, @qty, @subtotal, 'New Order',GETDATE(), @groupid)";
+                                         VALUES (@uid, @pid, @qty, @subtotal, 'Paid',GETDATE(), @groupid)";
 
                 orderCmd.Parameters.AddWithValue("@uid", uid);
                 orderCmd.Parameters.AddWithValue("@pid", row["Product_id"]);
@@ -223,6 +223,23 @@ namespace Ecom_Project.User
             paymentCmd.Parameters.AddWithValue("@groupid", orderGroupID);
 
             ob.SP_nonquery(paymentCmd);
+
+            // Update Stock only if Order is Paid
+            foreach (DataRow row in ds.Tables[0].Rows)
+            {
+                SqlCommand updateStock = new SqlCommand();
+
+                updateStock.CommandText = @" UPDATE Product_tab SET Product_stock = Product_stock - @qty,
+                                             Product_status = CASE WHEN Product_stock - @qty <= 0 THEN 'Not Available' ELSE 'Available' END
+                                             WHERE Product_id = @pid AND EXISTS
+                                            (SELECT 1 FROM Order_tab WHERE Product_id = @pid AND OrderGroupID = @groupid AND Order_status = 'Paid')";
+
+                updateStock.Parameters.AddWithValue("@pid", row["Product_id"]);
+                updateStock.Parameters.AddWithValue("@qty", row["Quantity"]);
+                updateStock.Parameters.AddWithValue("@groupid", orderGroupID);
+
+                ob.SP_nonquery(updateStock);
+            }
 
             // Clear cart
             SqlCommand updateCmd = new SqlCommand();
