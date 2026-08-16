@@ -100,13 +100,13 @@ namespace Ecom_Project.User
         public void itemdisplay()
         {
             int uid = Convert.ToInt32(Session["uid"]);
-            SqlCommand billcmd = new SqlCommand();
-            billcmd.CommandText = @"select p.Product_image,p.Product_name,c.Quantity,c.SubTotal 
+            SqlCommand itemscmd = new SqlCommand();
+            itemscmd.CommandText = @"select p.Product_image,p.Product_name,c.Quantity,c.SubTotal 
                                             from Cart_tab as c 
                                             join Product_tab p ON c.Product_id = p.Product_id
                                             WHERE User_id = @uid AND Cart_status = 1";
-            billcmd.Parameters.AddWithValue("@uid", uid);
-            DataSet ds = ob.SP_Adapter(billcmd);
+            itemscmd.Parameters.AddWithValue("@uid", uid);
+            DataSet ds = ob.SP_Adapter(itemscmd);
             gvcheckout.DataSource = ds;
             gvcheckout.DataBind();
         }
