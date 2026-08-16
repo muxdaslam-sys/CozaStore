@@ -270,7 +270,7 @@
                                         <span class="user-subtext">Manage orders & settings</span>
                                     </div>
                                     <div class="dropdown-divider"></div>
-                                    <a href="#">
+                                    <a href="ViewOrders.aspx">
                                         <i class="zmdi zmdi-shopping-basket"></i>
                                         My Orders
                                     </a>
