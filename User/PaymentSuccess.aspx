@@ -44,7 +44,7 @@
             width: 500px;
             height: 500px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(108, 99, 255, 0.15) 0%, rgba(255,255,255,0) 70%);
+            background: radial-gradient(circle, rgba(113, 127, 224, 0.15) 0%, rgba(255,255,255,0) 70%);
             top: 0%;
             left: 10%;
             filter: blur(60px);
@@ -101,7 +101,7 @@
             width: 100%;
             height: 100%;
             border: 4px solid #e2e8f0;
-            border-top: 4px solid #6c63ff;
+            border-top: 4px solid #717fe0;
             border-right: 4px solid #10b981;
             border-radius: 50%;
             animation: spinRing 1.1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
@@ -111,14 +111,14 @@
             position: absolute;
             width: 90px;
             height: 90px;
-            background: rgba(108, 99, 255, 0.16);
+            background: rgba(113, 127, 224, 0.16);
             border-radius: 50%;
             animation: pulseGlow 1.8s ease-out infinite;
         }
 
         .loader-icon-center {
             font-size: 38px;
-            color: #6c63ff;
+            color: #717fe0;
             z-index: 2;
             animation: bounceIcon 2s ease-in-out infinite;
         }
@@ -170,7 +170,7 @@
         .proc-progress-bar-fill {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, #6c63ff 0%, #3b82f6 50%, #10b981 100%);
+            background: linear-gradient(90deg, #717fe0 0%, #3b82f6 50%, #10b981 100%);
             border-radius: 12px;
             transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -185,7 +185,7 @@
         .proc-status-text {
             font-size: 13px;
             font-weight: 600;
-            color: #6c63ff;
+            color: #717fe0;
         }
 
         .proc-percent-text {
@@ -310,8 +310,8 @@
         }
 
         .order-badge-container:hover {
-            border-color: #6c63ff;
-            background: #f0eeff;
+            border-color: #717fe0;
+            background: #f0f1ff;
         }
 
         .order-badge-label {
@@ -323,7 +323,7 @@
         .order-badge-value {
             font-size: 17px;
             font-weight: 700;
-            color: #6c63ff;
+            color: #717fe0;
             letter-spacing: 0.5px;
         }
 
@@ -368,7 +368,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            background: linear-gradient(135deg, #6c63ff 0%, #5a52e0 100%);
+            background: linear-gradient(135deg, #717fe0 0%, #5a67d8 100%);
             color: #ffffff !important;
             font-weight: 600;
             font-size: 15px;
@@ -376,15 +376,15 @@
             border-radius: 14px;
             text-decoration: none !important;
             border: none;
-            box-shadow: 0 10px 25px rgba(108, 99, 255, 0.32);
+            box-shadow: 0 10px 25px rgba(113, 127, 224, 0.32);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             cursor: pointer;
         }
 
         .btn-pay-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 14px 32px rgba(108, 99, 255, 0.48);
-            background: linear-gradient(135deg, #5a52e0 0%, #4840c9 100%);
+            box-shadow: 0 14px 32px rgba(113, 127, 224, 0.48);
+            background: linear-gradient(135deg, #5a67d8 0%, #4f5bc4 100%);
         }
 
         .btn-pay-secondary {
@@ -559,7 +559,7 @@
         function triggerConfetti() {
             var container = document.getElementById("confetti-container");
             if (!container) return;
-            var colors = ["#10b981", "#6c63ff", "#3b82f6", "#f59e0b", "#ec4899"];
+            var colors = ["#10b981", "#717fe0", "#3b82f6", "#f59e0b", "#ec4899"];
             
             for (var i = 0; i < 28; i++) {
                 var confetti = document.createElement("div");
