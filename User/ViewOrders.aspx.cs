@@ -98,42 +98,80 @@ namespace Ecom_Project.User
         }
         protected void btn_send_Click(object sender, EventArgs e)
         {
+            // 1. PREVENT EMPTY MESSAGES: Stops blank or space-only ("   ") messages from being saved to the database.
+            //    Also checks that the hidden order ID field is present before processing.
+            if (string.IsNullOrWhiteSpace(tb_msg.Text) || string.IsNullOrEmpty(hf_ordergroupid.Value))
+            {
+                return;
+            }
             int uid = Convert.ToInt32(Session["uid"]);
-            int orderGroupID = Convert.ToInt32(hf_ordergroupid.Value);
-            string feedbackMessage = tb_msg.Text;
-
+            // 2. PREVENT PAGE RELOADS & CRASHES: Safely converts the hidden field value to an integer.
+            //    If the hidden field is invalid or empty, int.TryParse returns false instead of throwing 
+            //    a FormatException (which crashes the UpdatePanel and forces a full page reload).
+            if (!int.TryParse(hf_ordergroupid.Value, out int orderGroupID))
+            {
+                return;
+            }
+            string feedbackMessage = tb_msg.Text.Trim();
+            // 3. DATABASE INSERTION: Inserts the valid feedback message into Feedback_tab table.
             SqlCommand cmd = new SqlCommand();
-
             cmd.CommandText = @"INSERT INTO Feedback_tab (User_id, Product_id, Feedback_message, Feedback_reply, Feedback_status) VALUES (@uid, @productId, @message, '', 'Pending')";
-
             cmd.Parameters.AddWithValue("@uid", uid);
             cmd.Parameters.AddWithValue("@productId", orderGroupID);
             cmd.Parameters.AddWithValue("@message", feedbackMessage);
+
             int result = ob.SP_nonquery(cmd);
+
+            // 4. REFRESH CHAT STREAM: Reloads and binds the updated message list for this order.
             LoadChatHistory(orderGroupID.ToString());
         }
         public void LoadChatHistory(string orderGroupId)
         {
+            // 1. Clear previous text from the message input box
             tb_msg.Text = "";
             int uid = Convert.ToInt32(Session["uid"]);
+            // 2. FETCH USER NAME: Retrieve the logged-in user's name to construct the header greeting
             SqlCommand ucmd = new SqlCommand();
-            ucmd.CommandText = @"SELECT User_name FROM User_tab WHERE User_id = @uid"; 
+            ucmd.CommandText = @"SELECT User_name FROM User_tab WHERE User_id = @uid";
             ucmd.Parameters.AddWithValue("@uid", uid);
-            ucmd.Parameters.AddWithValue("@Product_id", orderGroupId);
-            string  name = ob.SP_Scalar(ucmd);
-            lbl_welcome.Text = "Welcome, " + name + "! How can I help you?";
+            string name = ob.SP_Scalar(ucmd);
 
+            // Display header greeting message
+            lbl_welcome.Text = "Welcome, " + name + "! How can I help you?";
+            // 3. FETCH CHAT MESSAGES: Query message history between this user & admin for the current order group
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = @"select u.User_name,f.Feedback_message,f.Feedback_reply 
-                                 from Feedback_tab f join User_tab u on f.User_id=u.User_id where f.User_id=@uid and Product_id=@Product_id";
+            cmd.CommandText = @"SELECT u.User_name, f.Feedback_message, f.Feedback_reply 
+                         FROM Feedback_tab f 
+                         JOIN User_tab u ON f.User_id = u.User_id 
+                         WHERE f.User_id = @uid AND f.Product_id = @Product_id 
+                         ORDER BY f.Feedback_id ASC";
             cmd.Parameters.AddWithValue("@uid", uid);
             cmd.Parameters.AddWithValue("@Product_id", orderGroupId);
-
             DataSet ds = ob.SP_Adapter(cmd);
+            // Track whether the automated "received message" response has been assigned
+            bool replyMessageShown = false;
+            // 4. AUTOMATED BOT RESPONSE: Attach confirmation text to the first unreplied message only
+            if (ds.Tables.Count > 0)
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    string reply = Convert.ToString(row["Feedback_reply"]);
+                    // If admin hasn't replied yet and no auto-reply has been shown, set the automated message
+                    if (string.IsNullOrEmpty(reply) && !replyMessageShown)
+                    {
+                        row["Feedback_reply"] = "We’ve received your message. Our team will get back to you shortly.";
+                        replyMessageShown = true; // Ensures it is only shown once for the pending message batch
+                    }
+                    else if (string.IsNullOrEmpty(reply))
+                    {
+                        // Leave empty so no blank admin bubble is rendered
+                        row["Feedback_reply"] = "";
+                    }
+                }
+            }
+            // 5. BIND MESSAGES: Bind dataset to the chat DataList control to render messages on screen
             DL_chat.DataSource = ds;
             DL_chat.DataBind();
-
-            
 
         }
 
