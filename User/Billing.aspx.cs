@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,8 +17,7 @@ namespace Ecom_Project.User
         {
             if (!IsPostBack)
             {
-
-                if (Request.QueryString["orderGroupID"] != null)
+                if (!string.IsNullOrEmpty(Request.QueryString["orderGroupID"]))
                 {
                     string orderGroupID = Request.QueryString["orderGroupID"];
                     lblbillid.Text = orderGroupID;
@@ -31,7 +30,6 @@ namespace Ecom_Project.User
                     Response.Redirect("uindex.aspx");
                     return;
                 }
-
             }
         }
 
@@ -43,7 +41,7 @@ namespace Ecom_Project.User
             cmd.CommandText = @"SELECT u.user_name,u.user_email, u.User_address,u.User_phone,u.User_pincode
                                 FROM Order_tab o INNER JOIN User_tab u
                                 ON o.User_id=u.User_id
-                                WHERE o.User_id=@uid AND o.Order_status='New Order'AND o.OrderGroupID=@groupid";
+                                WHERE o.User_id=@uid AND o.Order_status='Paid' AND o.OrderGroupID=@groupid";
             cmd.Parameters.AddWithValue("@uid", uid);
             cmd.Parameters.AddWithValue("@groupid", orderGroupID);
             SqlDataReader dr = ob.SP_Reader(cmd);
@@ -66,7 +64,7 @@ namespace Ecom_Project.User
             billcmd.CommandText = @"select p.Product_image,p.Product_name,o.Quantity,o.SubTotal 
                                             from Order_tab as o 
                                             join Product_tab p ON o.Product_id = p.Product_id
-                                            WHERE User_id = @uid AND Order_status='New Order' AND o.OrderGroupID=@groupid";
+                                            WHERE User_id = @uid AND Order_status='Paid' AND o.OrderGroupID=@groupid";
             billcmd.Parameters.AddWithValue("@uid", uid);
             billcmd.Parameters.AddWithValue("@groupid", orderGroupID);
             DataSet ds = ob.SP_Adapter(billcmd);
@@ -86,13 +84,13 @@ namespace Ecom_Project.User
                                 INNER JOIN Product_tab p
                                 ON o.Product_id = p.Product_id
                                 WHERE User_id = @uid
-                                AND Order_status='New Order' AND o.OrderGroupID=@groupid";
+                                AND Order_status='Paid' AND o.OrderGroupID=@groupid";
 
             cmd.Parameters.AddWithValue("@uid", uid);
             cmd.Parameters.AddWithValue("@groupid", orderGroupID);
             object result = ob.SP_Scalar(cmd);
 
-            lbltotal.Text = result.ToString();
+            lbltotal.Text = result != null ? result.ToString() : "0.00";
         }
     }
 }
