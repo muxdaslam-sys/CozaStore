@@ -323,7 +323,6 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            animation: chatSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         @keyframes chatSlideUp {
@@ -673,16 +672,15 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Admin Reply -->
-                                            <div class="bubble-flex-row flex-admin-left">
+                                            <!-- Admin Reply (Only rendered when Feedback_reply is not empty) -->
+                                            <div class="bubble-flex-row flex-admin-left" runat="server" visible='<%# !string.IsNullOrEmpty(Eval("Feedback_reply") as string) %>'>
                                                 <div class="chat-message-bubble bubble-admin-card">
                                                     <div class="bubble-sender-title">
                                                         <asp:Label ID="lbl_you0" runat="server">Admin Support</asp:Label>
                                                     </div>
                                                     <div>
                                                         <asp:Label ID="lbl_admin" runat="server"
-                                                            Text='<%# string.IsNullOrEmpty(Convert.ToString(Eval("Feedback_reply"))) ? "We will reply soon." : Convert.ToString(Eval("Feedback_reply")) %>'>
-                                                        </asp:Label>
+                                                            Text='<%# Eval("Feedback_reply") %>'></asp:Label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -695,8 +693,9 @@
                             <div class="chat-footer-bar">
                                 <div class="input-pill-container">
                                     <asp:TextBox ID="tb_msg" runat="server" CssClass="chat-text-box" placeholder="Type your message here..."></asp:TextBox>
-                                    <asp:Button ID="btn_send" runat="server" OnClick="btn_send_Click" Text="Send" CssClass="btn-send-message" />
+                                    <asp:Button ID="btn_send" runat="server" OnClick="btn_send_Click" Text="Send" CssClass="btn-send-message" ValidationGroup="ChatValidation" UseSubmitBehavior="false" />
                                 </div>
+                                <asp:RequiredFieldValidator ID="rfv_msg" runat="server" ControlToValidate="tb_msg" ErrorMessage="Please enter a message." ForeColor="#ef4444" Display="Dynamic" ValidationGroup="ChatValidation" Style="font-size: 12px; font-weight: 600; margin-top: 6px; display: block; padding-left: 10px;"></asp:RequiredFieldValidator>
                                 <asp:HiddenField ID="hf_ordergroupid" runat="server" />
                             </div>
 
@@ -709,9 +708,16 @@
         </ContentTemplate>
     </asp:UpdatePanel>
 
-    <!-- Script to render empty state layout if lbl_msg is visible -->
     <script type="text/javascript">
+        function scrollChatToBottom() {
+            var chatBody = document.querySelector('.chat-stream-body');
+            if (chatBody) {
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+        }
+
         document.addEventListener("DOMContentLoaded", function () {
+            scrollChatToBottom();
             var msgLabel = document.getElementById("<%= lbl_msg.ClientID %>");
             if (msgLabel && msgLabel.innerText.trim() !== "") {
                 var container = document.getElementById("empty-state-wrapper");
@@ -732,5 +738,11 @@
                 }
             }
         });
+
+        if (typeof Sys !== 'undefined' && Sys.WebForms && Sys.WebForms.PageRequestManager) {
+            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
+                scrollChatToBottom();
+            });
+        }
     </script>
 </asp:Content>
