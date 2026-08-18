@@ -58,6 +58,8 @@
 /* ─── Reset ─── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+ul, ol { list-style: none; list-style-type: none; margin: 0; padding: 0; }
+
 /* Kill ALL link underlines globally inside admin pages */
 a,
 a:hover,
@@ -155,9 +157,9 @@ html, body {
     overflow-y: auto;
 }
 
-.sidebar-nav ul { padding: 0 12px; }
+.sidebar-nav ul { list-style: none; list-style-type: none; padding: 0 12px; margin: 0; }
 
-.sidebar-nav ul li { margin-bottom: 2px; }
+.sidebar-nav ul li { list-style: none; list-style-type: none; margin-bottom: 2px; }
 
 .sidebar-nav ul li a {
     display: flex;
@@ -555,7 +557,7 @@ html, body {
     font-size: 11px; font-weight: 700;
     text-transform: uppercase; letter-spacing: 0.3px;
 }
-.badge-s::before { content:''; width:5px;height:5px;border-radius:50%;background:currentColor; }
+.badge-s::before { display: none !important; content: none !important; width: 0 !important; height: 0 !important; margin: 0 !important; }
 .bs-success { background:var(--success-soft); color:var(--success); }
 .bs-warning { background:var(--warning-soft); color:var(--warning); }
 .bs-danger  { background:var(--accent-soft);  color:var(--accent);  }

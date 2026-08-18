@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css" />
 
     <!-- Admin Dashboard CSS -->
-    <link rel="stylesheet" href="../css/admin-dashboard.css" />
+    <link rel="stylesheet" href="../css/admin-dashboard.css?v=3" />
 
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
 </head>
@@ -70,22 +70,22 @@
 
                 <div class="sidebar-label" style="margin-top:8px;">Management</div>
                 <ul>
-                    <li id="nav-add-category">
-                        <a href="Add_Category.aspx">
-                            <span class="nav-icon si-orange"><i class="fa-solid fa-folder-plus"></i></span>
-                            <span class="nav-label">Add Category</span>
+                    <li id="nav-user-mgmt">
+                        <a href="UserManagement.aspx">
+                            <span class="nav-icon si-orange"><i class="fa-solid fa-users"></i></span>
+                            <span class="nav-label">User Management</span>
                         </a>
                     </li>
-                    <li id="nav-add-product">
-                        <a href="Add_Product.aspx">
-                            <span class="nav-icon si-green"><i class="fa-solid fa-circle-plus"></i></span>
-                            <span class="nav-label">Add Product</span>
+                    <li id="nav-user-support">
+                        <a href="UserSupport.aspx">
+                            <span class="nav-icon si-green"><i class="fa-solid fa-headset"></i></span>
+                            <span class="nav-label">User Support</span>
                         </a>
                     </li>
-                    <li id="nav-add-admin">
-                        <a href="Add_Admin.aspx">
-                            <span class="nav-icon si-purple"><i class="fa-solid fa-user-plus"></i></span>
-                            <span class="nav-label">Add Admin</span>
+                    <li id="nav-admins">
+                        <a href="Admins.aspx">
+                            <span class="nav-icon si-purple"><i class="fa-solid fa-user-shield"></i></span>
+                            <span class="nav-label">Admins</span>
                         </a>
                     </li>
                 </ul>
@@ -94,9 +94,9 @@
             <!-- Admin Pill Footer -->
             <div class="sidebar-footer">
                 <div class="admin-pill">
-                    <div class="av">AD</div>
+                    <asp:Label ID="lblAvatarSidebar" runat="server" CssClass="av" Text="AD"></asp:Label>
                     <div class="av-info">
-                        <div class="av-name">Administrator</div>
+                        <asp:Label ID="lblAdminNameSidebar" runat="server" CssClass="av-name" Text="Administrator"></asp:Label>
                         <div class="av-role">Super Admin</div>
                     </div>
                     <i class="fa-solid fa-circle-check" style="color:#16a34a;font-size:14px;flex-shrink:0;"></i>
@@ -138,7 +138,7 @@
                     <!-- Profile Dropdown -->
                     <div class="profile-dropdown" id="profileDropdown">
                         <div class="profile-trigger" id="profileTrigger">
-                            <div class="p-avatar">AD</div>
+                            <asp:Label ID="lblAvatarTop" runat="server" CssClass="p-avatar" Text="AD"></asp:Label>
                             <div class="p-name-wrap">
                                 <asp:Label ID="lblAdminName" runat="server" Text="Administrator" ClientIDMode="Static" CssClass="p-name"></asp:Label>
                                 <span class="p-role">Super Admin</span>
@@ -148,7 +148,7 @@
 
                         <div class="profile-menu">
                             <div class="pm-head">
-                                <span class="pm-n">Administrator</span>
+                                <asp:Label ID="lblAdminNameMenu" runat="server" CssClass="pm-n" Text="Administrator"></asp:Label>
                                 <span class="pm-r">Super Admin</span>
                             </div>
                             <ul class="pm-items">
@@ -232,14 +232,20 @@
             'admin_homepage.aspx' : 'nav-dashboard',
             'category.aspx'       : 'nav-category',
             'product.aspx'        : 'nav-product',
-            'add_category.aspx'   : 'nav-add-category',
-            'add_product.aspx'    : 'nav-add-product',
-            'add_admin.aspx'      : 'nav-add-admin'
+            'usermanagement.aspx' : 'nav-user-mgmt',
+            'usersupport.aspx'    : 'nav-user-support',
+            'admins.aspx'         : 'nav-admins',
+            'add_category.aspx'   : 'nav-category',
+            'add_product.aspx'    : 'nav-product',
+            'add_admin.aspx'      : 'nav-admins'
         };
         var nameMap = {
             'admin_homepage.aspx' : 'Dashboard',
             'category.aspx'       : 'Categories',
             'product.aspx'        : 'Products',
+            'usermanagement.aspx' : 'User Management',
+            'usersupport.aspx'    : 'User Support',
+            'admins.aspx'         : 'Admin Accounts',
             'add_category.aspx'   : 'Add Category',
             'add_product.aspx'    : 'Add Product',
             'add_admin.aspx'      : 'Add Admin'
