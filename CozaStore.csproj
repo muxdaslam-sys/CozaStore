@@ -73,11 +73,14 @@
     <Content Include="Admin\Add_Category.aspx" />
     <Content Include="Admin\Add_Product.aspx" />
     <Content Include="Admin\Add_Admin.aspx" />
+    <Content Include="Admin\Admins.aspx" />
     <Content Include="Admin\Admin_HomePage.aspx" />
     <Content Include="Admin\Category.aspx" />
     <Content Include="Admin\Edit_Category.aspx" />
     <Content Include="Admin\Edit_Product.aspx" />
     <Content Include="Admin\Product.aspx" />
+    <Content Include="Admin\UserManagement.aspx" />
+    <Content Include="Admin\UserSupport.aspx" />
     <Content Include="blog-detail.html" />
     <Content Include="blog.html" />
     <Content Include="Connected Services\PaymentService\Ecom_Project.PaymentService.CompositeType.datasource">
@@ -307,6 +310,13 @@
     <Compile Include="Admin\Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Admins.aspx.cs">
+      <DependentUpon>Admins.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Admins.aspx.designer.cs">
+      <DependentUpon>Admins.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Admin_HomePage.aspx.cs">
       <DependentUpon>Admin_HomePage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -341,6 +351,20 @@
     </Compile>
     <Compile Include="Admin\Product.aspx.designer.cs">
       <DependentUpon>Product.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\UserManagement.aspx.cs">
+      <DependentUpon>UserManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\UserManagement.aspx.designer.cs">
+      <DependentUpon>UserManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\UserSupport.aspx.cs">
+      <DependentUpon>UserSupport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\UserSupport.aspx.designer.cs">
+      <DependentUpon>UserSupport.aspx</DependentUpon>
     </Compile>
     <Compile Include="ConClass.cs" />
     <Compile Include="Connected Services\PaymentService\Reference.cs">
