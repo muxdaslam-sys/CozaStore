@@ -78,6 +78,7 @@
     <Content Include="Admin\Category.aspx" />
     <Content Include="Admin\Edit_Category.aspx" />
     <Content Include="Admin\Edit_Product.aspx" />
+    <Content Include="Admin\Orders.aspx" />
     <Content Include="Admin\Product.aspx" />
     <Content Include="Admin\UserManagement.aspx" />
     <Content Include="Admin\UserSupport.aspx" />
@@ -344,6 +345,13 @@
     </Compile>
     <Compile Include="Admin\Edit_Product.aspx.designer.cs">
       <DependentUpon>Edit_Product.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Orders.aspx.cs">
+      <DependentUpon>Orders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Orders.aspx.designer.cs">
+      <DependentUpon>Orders.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Product.aspx.cs">
       <DependentUpon>Product.aspx</DependentUpon>
