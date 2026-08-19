@@ -15,6 +15,13 @@ namespace Ecom_Project.Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Prevent caching
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
+            Response.Cache.SetExpires(DateTime.UtcNow.AddDays(-1));
+            Response.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
+            Response.Headers.Add("Pragma", "no-cache");
+
             if (Session["uid"] == null || Session["logtype"] == null || Session["logtype"].ToString() != "admin")
             {
                 Response.Redirect("~/Login.aspx");
