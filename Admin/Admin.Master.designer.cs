@@ -33,6 +33,33 @@ namespace Ecom_Project.Admin
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// lblAvatarSidebar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAvatarSidebar;
+
+        /// <summary>
+        /// lblAdminNameSidebar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAdminNameSidebar;
+
+        /// <summary>
+        /// lblAvatarTop control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAvatarTop;
+
+        /// <summary>
         /// lblAdminName control.
         /// </summary>
         /// <remarks>
@@ -40,6 +67,15 @@ namespace Ecom_Project.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblAdminName;
+
+        /// <summary>
+        /// lblAdminNameMenu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAdminNameMenu;
 
         /// <summary>
         /// btnLogout control.

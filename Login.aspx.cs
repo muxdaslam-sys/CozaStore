@@ -24,23 +24,38 @@ namespace Ecom_Project
             int i = Convert.ToInt32(obj.Scalar(sel_loginid).ToString());
             if (i == 1)
             {
-                string selid = "select reg_id from login_tab where username='" + ltb1.Text + "' and password ='" + ltb2.Text + "'";
-                string getid = obj.Scalar(selid);
-                Session["uid"] = getid;
+               
+                    string selid = "select reg_id from login_tab where username='" + ltb1.Text + "' and password ='" + ltb2.Text + "'";
+                    string getid = obj.Scalar(selid);
+                    Session["uid"] = getid;
 
-                string sel_logtype = "select logtype from login_tab where username='" + ltb1.Text + "' and password ='" + ltb2.Text + "'";
-                string get_logtype = obj.Scalar(sel_logtype);
-                Session["logtype"] = get_logtype;
-                FormsAuthentication.SetAuthCookie(ltb1.Text, false);
+                    string sel_logtype = "select logtype from login_tab where username='" + ltb1.Text + "' and password ='" + ltb2.Text + "'";
+                    string get_logtype = obj.Scalar(sel_logtype);
+                    Session["logtype"] = get_logtype;
+                    FormsAuthentication.SetAuthCookie(ltb1.Text, false);
 
-                if (get_logtype == "admin")
-                {
-                    Response.Redirect("~/Admin/Admin_HomePage.aspx");
-                }
-                else if (get_logtype == "user")
-                {
-                    Response.Redirect("~/User/uindex.aspx");
-                }
+                    if (get_logtype == "admin")
+                    {
+                        Response.Redirect("~/Admin/Admin_HomePage.aspx");
+                    }
+                    else if (get_logtype == "user")
+                    {
+                       string status = "SELECT u.User_status FROM login_tab l INNER JOIN User_tab u ON l.reg_id = u.User_id where username='" + ltb1.Text + "' and password ='" + ltb2.Text + "'";
+                       string st = obj.Scalar(status).ToString();
+                       if (st == "Active")
+                       {
+                         Response.Redirect("~/User/uindex.aspx");
+                       }
+                        else
+                        {
+                          lbl_loginsuccess.Visible = true;
+                          lbl_loginsuccess.CssClass = "feedback-message feedback-danger";
+                          lbl_loginsuccess.Text = "Your Account Is Supended";
+                        }
+                    }
+                
+               
+
             }
             else
             {
