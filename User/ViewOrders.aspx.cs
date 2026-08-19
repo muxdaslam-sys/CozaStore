@@ -38,8 +38,11 @@ namespace Ecom_Project.User
             int uid = Convert.ToInt32(Session["uid"]);
 
             SqlCommand outer_cmd = new SqlCommand();
-            outer_cmd.CommandText = @"select DISTINCT OrderGroupID,Order_Date,SubTotal from Order_tab 
-                                            WHERE User_id = @uid AND Order_status = 'Paid'";
+            outer_cmd.CommandText = @"SELECT OrderGroupID, MAX(Order_Date) AS Order_Date, SUM(SubTotal) AS SubTotal 
+                                      FROM Order_tab 
+                                      WHERE User_id = @uid AND Order_status = 'Paid' 
+                                      GROUP BY OrderGroupID
+                                      ORDER BY OrderGroupID DESC";
             outer_cmd.Parameters.AddWithValue("@uid", uid);
             DataSet ds_outer = ob.SP_Adapter(outer_cmd);
             DL_outer.DataSource = ds_outer;
