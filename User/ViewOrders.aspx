@@ -4,533 +4,451 @@
     <style type="text/css">
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-        /* Base Page Setup */
-        .orders-page-section {
-            background-color: #f1f5f9;
-            padding: 50px 0 100px 0;
-            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-            color: #0f172a;
-            min-height: 80vh;
+        /* Modern Page Container */
+        .order-page-root {
+            background-color: #f9fafb;
+            padding: 48px 0 96px 0;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #101828;
+            min-height: 85vh;
         }
 
-        .orders-container {
-            max-width: 1040px;
+        .order-page-container {
+            max-width: 960px;
             margin: 0 auto;
+            padding: 0 16px;
         }
 
-        /* Order Card Component */
-        .ecom-order-card {
+        /* Reset ASP.NET DataList default table structure */
+        .dl-reset-table,
+        .dl-reset-table table,
+        .dl-reset-table tbody,
+        .dl-reset-table tr,
+        .dl-reset-table td {
+            display: block !important;
+            width: 100% !important;
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            background: transparent !important;
+        }
+
+        /* Title Area */
+        .order-header-area {
+            margin-bottom: 32px;
+        }
+
+        .order-header-title {
+            font-size: 30px;
+            font-weight: 800;
+            color: #101828;
+            letter-spacing: -0.02em;
+            margin-bottom: 6px;
+        }
+
+        .order-header-sub {
+            font-size: 15px;
+            color: #475467;
+            margin: 0;
+        }
+
+        /* Order Card */
+        .order-card-root {
             background: #ffffff;
-            border-radius: 20px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
-            margin-bottom: 30px;
+            border: 1px solid #eaecf0;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(16, 24, 40, 0.04), 0 1px 2px rgba(16, 24, 40, 0.02);
+            margin-bottom: 24px;
             overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.2s ease-in-out;
         }
 
-        .ecom-order-card:hover {
-            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.09);
-            border-color: #cbd5e1;
-            transform: translateY(-2px);
+        .order-card-root:hover {
+            border-color: #d0d5dd;
+            box-shadow: 0 4px 16px rgba(16, 24, 40, 0.08);
         }
 
-        /* Card Top Header */
-        .ecom-card-header {
-            background: #ffffff;
-            padding: 22px 28px;
-            border-bottom: 1px solid #f1f5f9;
+        /* Card Header Bar */
+        .order-card-header {
+            background: #fcfcfd;
+            padding: 20px 24px;
+            border-bottom: 1px solid #eaecf0;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 18px;
+            gap: 16px;
         }
 
-        .ecom-header-left {
+        .order-meta-group {
             display: flex;
             align-items: center;
-            gap: 24px;
+            gap: 32px;
             flex-wrap: wrap;
         }
 
-        .meta-group {
+        .meta-unit {
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 2px;
         }
 
-        .meta-label {
-            font-size: 11px;
-            font-weight: 800;
+        .meta-unit-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #475467;
             text-transform: uppercase;
-            letter-spacing: 0.6px;
-            color: #94a3b8;
-            line-height: 1;
+            letter-spacing: 0.04em;
         }
 
-        .meta-value-text {
+        .meta-unit-val {
             font-size: 14px;
             font-weight: 700;
-            color: #0f172a;
+            color: #101828;
         }
 
-        .order-id-tag {
-            background: #0f172a;
-            color: #ffffff;
-            font-size: 13px;
+        .meta-unit-val.val-id {
+            font-family: monospace;
+            font-size: 15px;
+            color: #717fe0;
             font-weight: 800;
-            padding: 6px 16px;
-            border-radius: 30px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
         }
 
-        .order-id-tag .id-highlight {
-            color: #38bdf8;
+        .meta-unit-val.val-price {
+            font-size: 16px;
+            font-weight: 800;
+            color: #101828;
         }
 
-        .status-badge-paid {
-            background: #f0fdf4;
-            color: #16a34a;
-            font-size: 12.5px;
-            font-weight: 700;
-            padding: 5px 14px;
-            border-radius: 20px;
-            border: 1px solid #bbf7d0;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .status-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: #16a34a;
-            box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
-        }
-
-        /* Card Action Buttons */
-        .ecom-header-right {
+        .order-card-actions {
             display: flex;
             align-items: center;
             gap: 12px;
-            flex-wrap: wrap;
         }
 
-        .btn-invoice-style {
-            background: linear-gradient(135deg, #717fe0 0%, #5a67d8 100%);
-            color: #ffffff !important;
-            font-size: 13.5px;
-            font-weight: 700;
-            padding: 11px 22px;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
+        /* Minimalist Buttons */
+        .btn-modern-secondary {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 14px rgba(113, 127, 224, 0.32);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            text-decoration: none;
-        }
-
-        .btn-invoice-style:hover {
-            background: linear-gradient(135deg, #5a67d8 0%, #4338ca 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(113, 127, 224, 0.48);
-        }
-
-        .btn-chat-style {
+            justify-content: center;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #344054;
             background: #ffffff;
-            color: #334155 !important;
-            font-size: 13.5px;
-            font-weight: 700;
-            padding: 10px 20px;
-            border-radius: 12px;
-            border: 1.5px solid #cbd5e1;
+            border: 1px solid #d0d5dd;
+            border-radius: 8px;
             cursor: pointer;
+            transition: all 0.15s ease;
+            text-decoration: none !important;
+            height: 38px;
+            line-height: 1;
+            box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+        }
+
+        .btn-modern-secondary:hover {
+            background: #f9fafb;
+            color: #182230;
+            border-color: #98a2b3;
+        }
+
+        .btn-modern-primary {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            justify-content: center;
+            padding: 8px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #ffffff;
+            background: #717fe0;
+            border: 1px solid #717fe0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            text-decoration: none !important;
+            height: 38px;
+            line-height: 1;
+            box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
         }
 
-        .btn-chat-style:hover {
-            background: #f8fafc;
-            border-color: #717fe0;
-            color: #717fe0 !important;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+        .btn-modern-primary:hover {
+            background: #5b69c7;
+            border-color: #5b69c7;
+            color: #ffffff;
         }
 
-        /* Products Body List */
-        .ecom-card-body {
-            padding: 24px 28px;
-            background: #ffffff;
+        /* Items Section */
+        .order-card-body {
+            padding: 0 24px;
         }
 
-        .ecom-product-item {
+        .item-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 20px;
-            background: #f8fafc;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            margin-bottom: 14px;
-            transition: all 0.2s ease;
+            padding: 20px 0;
+            border-bottom: 1px solid #f2f4f7;
+            gap: 16px;
         }
 
-        .ecom-product-item:last-child {
-            margin-bottom: 0;
+        .item-row:last-child {
+            border-bottom: none;
         }
 
-        .ecom-product-item:hover {
-            border-color: #cbd5e1;
-            background: #ffffff;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-        }
-
-        .product-media-wrap {
+        .item-left-block {
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 16px;
         }
 
-        .product-img-box {
+        .item-img {
             width: 72px;
             height: 72px;
-            border-radius: 16px;
             object-fit: cover;
-            border: 1px solid #e2e8f0;
-            background: #ffffff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            border-radius: 10px;
+            border: 1px solid #eaecf0;
+            background: #f9fafb;
+            flex-shrink: 0;
         }
 
-        .product-details-wrap {
+        .item-details {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
         }
 
-        .product-name-heading {
-            font-size: 15.5px;
-            font-weight: 700;
-            color: #0f172a;
+        .item-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #101828;
             line-height: 1.3;
         }
 
-        .product-qty-badge {
-            font-size: 12.5px;
-            font-weight: 600;
-            color: #64748b;
-            background: #ffffff;
-            padding: 4px 12px;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-            display: inline-block;
-            width: fit-content;
+        .item-qty-tag {
+            font-size: 13px;
+            font-weight: 500;
+            color: #475467;
         }
 
         /* Empty State */
-        .empty-state-card {
+        .empty-state-root {
             background: #ffffff;
-            border-radius: 24px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 10px 35px rgba(15, 23, 42, 0.04);
-            padding: 70px 30px;
+            border: 1px solid #eaecf0;
+            border-radius: 16px;
+            padding: 64px 24px;
             text-align: center;
-            max-width: 520px;
-            margin: 30px auto 0 auto;
+            max-width: 500px;
+            margin: 48px auto;
+            box-shadow: 0 1px 3px rgba(16, 24, 40, 0.04);
         }
 
-        .empty-icon-orb {
-            width: 95px;
-            height: 95px;
-            background: linear-gradient(135deg, #e0e7ff 0%, #eef2ff 100%);
+        .empty-icon-wrap {
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
+            background: #f2f4f7;
+            color: #475467;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 24px auto;
-            color: #717fe0;
-            font-size: 40px;
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.18);
-        }
-
-        .empty-state-heading {
             font-size: 24px;
-            font-weight: 800;
-            color: #0f172a;
-            margin-bottom: 8px;
+            margin: 0 auto 16px auto;
         }
 
-        .empty-state-sub {
-            font-size: 14.5px;
-            color: #64748b !important;
-            display: block;
-            margin-bottom: 30px;
-        }
-
-        .btn-explore-catalog {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #717fe0 0%, #5a67d8 100%);
-            color: #ffffff !important;
+        .empty-title {
+            font-size: 18px;
             font-weight: 700;
-            font-size: 14.5px;
-            padding: 14px 34px;
-            border-radius: 14px;
-            text-decoration: none !important;
-            box-shadow: 0 8px 22px rgba(99, 102, 241, 0.35);
-            transition: all 0.25s ease;
+            color: #101828;
+            margin-bottom: 6px;
         }
 
-        .dl-reset-table {
-            width: 100%;
-            border-collapse: collapse;
+        .empty-desc {
+            font-size: 14px;
+            color: #475467;
+            margin-bottom: 24px;
         }
 
-        .dl-reset-table > tbody > tr > td {
-            padding: 0;
-            border: none;
-            display: block;
-            width: 100%;
-        }
-
-        /* NEW MODERN FLOATING CHAT WIDGET WITH PROPER CLOSE BUTTON */
-        .chat-overlay-modal {
+        /* Support Chat Modal */
+        .chat-drawer-overlay {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(16, 24, 40, 0.45);
+            backdrop-filter: blur(4px);
             z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
 
-        .chat-window-card {
-            width: 410px;
-            height: 550px;
-            max-height: 82vh;
+        .chat-drawer-card {
             background: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.25);
-            border: 1px solid #e2e8f0;
+            width: 100%;
+            max-width: 500px;
+            height: 580px;
+            max-height: 90vh;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(16, 24, 40, 0.2);
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            animation: chatFadeUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @keyframes chatSlideUp {
-            from { opacity: 0; transform: translateY(40px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+        @keyframes chatFadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        /* Chat Header with Clear Close Button */
-        .chat-header-bar {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            padding: 18px 22px;
+        .chat-drawer-header {
+            padding: 18px 24px;
+            border-bottom: 1px solid #eaecf0;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            color: #ffffff;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            background: #ffffff;
         }
 
-        .header-profile-flex {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .header-avatar-badge {
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #717fe0 0%, #5a67d8 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            font-size: 20px;
-            box-shadow: 0 4px 14px rgba(113, 127, 224, 0.4);
-            position: relative;
-        }
-
-        .online-dot-indicator {
-            position: absolute;
-            bottom: -2px;
-            right: -2px;
-            width: 12px;
-            height: 12px;
-            background: #22c55e;
-            border: 2px solid #0f172a;
-            border-radius: 50%;
-        }
-
-        .header-text-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .chat-support-heading {
+        .chat-header-title {
             font-size: 16px;
-            font-weight: 800;
-            color: #ffffff;
+            font-weight: 700;
+            color: #101828;
+            margin: 0 0 2px 0;
+        }
+
+        .chat-header-sub {
+            font-size: 13px;
+            color: #475467;
             margin: 0;
-            line-height: 1.2;
-        }
-
-        .chat-welcome-sub {
-            font-size: 12px;
-            color: #94a3b8;
             display: block;
-            margin-top: 2px;
         }
 
-        /* STYLISH CLOSE BUTTON WITH EXPLICIT TEXT */
-        .chat-close-text-btn {
-            background: rgba(255, 255, 255, 0.15) !important;
-            color: #ffffff !important;
-            border: 1px solid rgba(255, 255, 255, 0.25) !important;
-            border-radius: 20px !important;
-            padding: 7px 18px !important;
-            font-size: 12.5px !important;
-            font-weight: 700 !important;
-            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif !important;
-            cursor: pointer !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            transition: all 0.25s ease !important;
-            outline: none !important;
-            line-height: 1 !important;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15) !important;
-            letter-spacing: 0.3px !important;
+        .chat-drawer-close {
+            background: #fee2e2;
+            color: #ef4444;
+            border: 1px solid #fca5a5;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.15s ease;
         }
 
-        .chat-close-text-btn:hover {
-            background: #ef4444 !important;
-            border-color: #ef4444 !important;
-            color: #ffffff !important;
-            transform: translateY(-1px) scale(1.03) !important;
-            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4) !important;
+        .chat-drawer-close:hover {
+            background: #ef4444;
+            color: #ffffff;
         }
 
-        /* Chat Body Messages */
-        .chat-stream-body {
+        .chat-drawer-body {
             flex: 1;
             padding: 20px;
+            background: #f9fafb;
             overflow-y: auto;
-            background: #f8fafc;
             display: flex;
             flex-direction: column;
+            gap: 12px;
         }
 
-        .chat-message-item {
-            margin-bottom: 16px;
-        }
-
-        .bubble-flex-row {
+        .chat-msg-row {
             display: flex;
             width: 100%;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
-        .flex-user-right {
+        .chat-msg-right {
             justify-content: flex-end;
         }
 
-        .flex-admin-left {
+        .chat-msg-left {
             justify-content: flex-start;
         }
 
-        .chat-message-bubble {
+        .chat-bubble {
             max-width: 82%;
-            padding: 12px 17px;
-            border-radius: 18px;
+            padding: 12px 16px;
+            border-radius: 14px;
             font-size: 14px;
             line-height: 1.45;
-            box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+            word-wrap: break-word;
         }
 
-        .bubble-user-gradient {
-            background: linear-gradient(135deg, #717fe0 0%, #5a67d8 100%);
+        .bubble-user {
+            background: #717fe0;
             color: #ffffff;
-            border-bottom-right-radius: 4px;
+            border-bottom-right-radius: 2px;
+            box-shadow: 0 2px 8px rgba(113, 127, 224, 0.2);
         }
 
-        .bubble-admin-card {
+        .bubble-admin {
             background: #ffffff;
-            color: #0f172a;
-            border: 1px solid #e2e8f0;
-            border-bottom-left-radius: 4px;
+            color: #101828;
+            border: 1px solid #eaecf0;
+            border-bottom-left-radius: 2px;
+            box-shadow: 0 1px 3px rgba(16, 24, 40, 0.04);
         }
 
-        .bubble-sender-title {
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            margin-bottom: 4px;
-            opacity: 0.85;
-        }
-
-        /* Chat Footer & Input */
-        .chat-footer-bar {
+        .chat-drawer-footer {
             padding: 16px 20px;
             background: #ffffff;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid #eaecf0;
         }
 
-        .input-pill-container {
+        .chat-input-wrap {
             display: flex;
             align-items: center;
-            gap: 10px;
-            background: #f1f5f9;
-            border-radius: 30px;
-            padding: 5px 6px 5px 18px;
-            border: 1.5px solid #e2e8f0;
-            transition: all 0.2s ease;
+            gap: 8px;
         }
 
-        .input-pill-container:focus-within {
-            border-color: #717fe0;
-            background: #ffffff;
-            box-shadow: 0 0 0 3px rgba(113, 127, 224, 0.15);
-        }
-
-        .chat-text-box {
-            border: none !important;
-            background: transparent !important;
+        .chat-input-field {
             flex: 1;
+            height: 42px;
+            background: #ffffff;
+            border: 1px solid #d0d5dd;
+            border-radius: 10px;
+            padding: 0 14px;
             font-size: 14px;
-            outline: none !important;
-            color: #0f172a;
-            box-shadow: none !important;
+            color: #101828;
+            outline: none;
         }
 
-        .btn-send-message {
-            background: linear-gradient(135deg, #717fe0 0%, #5a67d8 100%);
-            color: #ffffff !important;
+        .chat-input-field:focus {
+            border-color: #717fe0;
+            box-shadow: 0 0 0 3px rgba(113, 127, 224, 0.12);
+        }
+
+        .btn-chat-submit {
+            height: 42px;
+            padding: 0 18px;
+            background: #717fe0;
+            color: #ffffff;
             border: none;
-            border-radius: 20px;
-            padding: 10px 22px;
-            font-size: 13.5px;
-            font-weight: 700;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 13px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(113, 127, 224, 0.35);
+            transition: background 0.15s ease;
         }
 
-        .btn-send-message:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(113, 127, 224, 0.5);
-            background: linear-gradient(135deg, #5a67d8 0%, #4338ca 100%);
+        .btn-chat-submit:hover {
+            background: #5b69c7;
+        }
+
+        .chat-validation-msg {
+            font-size: 12px;
+            font-weight: 600;
+            color: #ef4444 !important;
+            margin-top: 6px;
+            display: block;
         }
     </style>
 </asp:Content>
@@ -540,81 +458,73 @@
 
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
+            <div class="order-page-root">
+                <div class="container order-page-container">
 
-            <!-- Hero Banner -->
-            <section class="bg-img1 txt-center p-lr-15 p-tb-70" style="background-image: url('../images/bg-02.jpg');">
-                <h2 class="ltext-105 cl0 txt-center font-weight-bold">
-                    My Orders
-                </h2>
-            </section>
+                    <!-- Header -->
+                    <div class="order-header-area">
+                        <h1 class="order-header-title">Order History</h1>
+                        <p class="order-header-sub">Check the status of recent orders, view invoices, and contact support.</p>
+                    </div>
 
-            <!-- Main Orders Content -->
-            <div class="orders-page-section">
-                <div class="container orders-container">
-
-                    <!-- Outer DataList for Order Cards -->
-                    <asp:DataList ID="DL_outer" runat="server" OnItemDataBound="DL_outer_ItemDataBound" CssClass="dl-reset-table">
+                    <!-- Orders DataList -->
+                    <asp:DataList ID="DL_outer" runat="server" OnItemDataBound="DL_outer_ItemDataBound" RepeatLayout="Flow" CssClass="dl-reset-table">
                         <ItemTemplate>
-                            <div class="ecom-order-card">
+                            <div class="order-card-root">
 
-                                <!-- Order Card Header Bar -->
-                                <div class="ecom-card-header">
-                                    <div class="ecom-header-left">
-                                        <div class="order-id-tag">
-                                            <span>ORDER</span>
-                                            <span class="id-highlight">#<asp:Label ID="lbl_order_group_id" runat="server" Text='<%# Eval("OrderGroupID") %>'></asp:Label></span>
+                                <!-- Order Header -->
+                                <div class="order-card-header">
+                                    <div class="order-meta-group">
+                                        <div class="meta-unit">
+                                            <span class="meta-unit-label">Order</span>
+                                            <span class="meta-unit-val val-id">#<asp:Label ID="lbl_order_group_id" runat="server" Text='<%# Eval("OrderGroupID") %>'></asp:Label></span>
                                         </div>
 
-                                        <div class="meta-group">
-                                            <span class="meta-label">Date Placed</span>
-                                            <span class="meta-value-text">
-                                                <i class="fa fa-calendar-o text-primary mr-1"></i>
+                                        <div class="meta-unit">
+                                            <span class="meta-unit-label">Date Placed</span>
+                                            <span class="meta-unit-val">
                                                 <asp:Label ID="lbl_order_date" runat="server" Text='<%# Eval("Order_Date", "{0:dd-MM-yyyy}") %>'></asp:Label>
                                             </span>
                                         </div>
 
-                                        <div class="meta-group">
-                                            <span class="meta-label">Total Amount</span>
-                                            <span class="meta-value-text">
+                                        <div class="meta-unit">
+                                            <span class="meta-unit-label">Total Amount</span>
+                                            <span class="meta-unit-val val-price">
                                                 &#8377;<asp:Label ID="lbl_total_amount" runat="server" Text='<%# Eval("SubTotal") %>'></asp:Label>
                                             </span>
                                         </div>
-
-                                        <div class="status-badge-paid">
-                                            <span class="status-dot"></span>Paid
-                                        </div>
                                     </div>
 
-                                    <div class="ecom-header-right">
+                                    <div class="order-card-actions">
                                         <asp:Button ID="btn_viewBill"
                                             runat="server"
-                                            OnClick="btn_viewBill_Click"
                                             Text="View Invoice"
-                                            CssClass="btn-invoice-style"
-                                            CommandArgument='<%# Eval("OrderGroupID") %>' />
+                                            CommandArgument='<%# Eval("OrderGroupID") %>'
+                                            OnClick="btn_viewBill_Click"
+                                            CssClass="btn-modern-secondary" />
 
                                         <asp:Button ID="btn_feedback" 
                                             runat="server" 
+                                            Text="Support" 
+                                            CommandArgument='<%# Eval("OrderGroupID") %>'
                                             OnClick="btn_feedback_Click" 
-                                            CommandArgument='<%# Eval("OrderGroupID") %>' 
-                                            Text="Feedback / Chat" 
-                                            CssClass="btn-chat-style" />
+                                            CssClass="btn-modern-primary" />
                                     </div>
                                 </div>
 
-                                <!-- Order Card Body (Products) -->
-                                <div class="ecom-card-body">
-                                    <asp:DataList ID="DL_inner" runat="server" CssClass="dl-reset-table">
+                                <!-- Items List -->
+                                <div class="order-card-body">
+                                    <asp:DataList ID="DL_inner" runat="server" RepeatLayout="Flow" CssClass="dl-reset-table">
                                         <ItemTemplate>
-                                            <div class="ecom-product-item">
-                                                <div class="product-media-wrap">
-                                                    <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("Product_image") %>' CssClass="product-img-box" />
-                                                    <div class="product-details-wrap">
-                                                        <span class="product-name-heading">
+                                            <div class="item-row">
+                                                <div class="item-left-block">
+                                                    <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("Product_image") %>' CssClass="item-img" />
+                                                    <div class="item-details">
+                                                        <span class="item-title">
                                                             <asp:Label ID="lbl_name" runat="server" Text='<%# Eval("Product_name") %>'></asp:Label>
                                                         </span>
-                                                        <span class="product-qty-badge">Quantity:
-                                                            <asp:Label ID="lbl_quantity" runat="server" Text='<%# Eval("Quantity") %>'></asp:Label>
+                                                        <span class="item-qty-tag">
+                                                            Quantity: <asp:Label ID="lbl_quantity" runat="server" Text='<%# Eval("Quantity") %>'></asp:Label>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -627,121 +537,83 @@
                         </ItemTemplate>
                     </asp:DataList>
 
-                    <!-- Empty State Container when no orders exist -->
-                    <div id="empty-state-wrapper">
-                        <asp:Label ID="lbl_msg" runat="server" Visible="False"></asp:Label>
-                    </div>
-
-                    <!-- FLOATING LIVE CHAT WIDGET WITH EXPLICIT TEXT CLOSE BUTTON -->
-                    <asp:Panel ID="Panel1" runat="server" CssClass="chat-overlay-modal" Visible="False">
-                        <div class="chat-window-card">
-                            
-                            <!-- Chat Header Bar -->
-                            <div class="chat-header-bar">
-                                <div class="header-profile-flex">
-                                    <div class="header-avatar-badge">
-                                        <i class="fa fa-comments"></i>
-                                        <span class="online-dot-indicator"></span>
-                                    </div>
-                                    <div class="header-text-group">
-                                        <h5 class="chat-support-heading">Order Support</h5>
-                                        <span class="chat-welcome-sub">
-                                            <asp:Label ID="lbl_welcome" runat="server"></asp:Label>
-                                        </span>
-                                    </div>
+                    <!-- Empty State -->
+                    <asp:Panel ID="pnl_empty_state" runat="server">
+                        <asp:Label ID="lbl_msg" runat="server" Visible="False">
+                            <div class="empty-state-root">
+                                <div class="empty-icon-wrap">
+                                    <i class="fa fa-shopping-bag"></i>
                                 </div>
-                                
-                                <!-- STYLISH CLOSE BUTTON WITH EXPLICIT TEXT -->
-                                <asp:Button ID="btn_close" runat="server" OnClick="btn_close_click" Text="Close Chat" CssClass="chat-close-text-btn" />
+                                <h3 class="empty-title">No orders yet</h3>
+                                <p class="empty-desc">When you place orders, they will appear here.</p>
+                                <a href="uindex.aspx" class="btn-modern-primary">
+                                    Browse Shop
+                                </a>
                             </div>
-
-                            <!-- Chat Messages Stream Body -->
-                            <div class="chat-stream-body">
-                                <asp:DataList ID="DL_chat" runat="server" CssClass="dl-reset-table w-100">
-                                    <ItemTemplate>
-                                        <div class="chat-message-item">
-                                            <!-- User Message -->
-                                            <div class="bubble-flex-row flex-user-right">
-                                                <div class="chat-message-bubble bubble-user-gradient">
-                                                    <div class="bubble-sender-title">
-                                                        <asp:Label ID="lbl_you" runat="server">You</asp:Label>
-                                                    </div>
-                                                    <div>
-                                                        <asp:Label ID="lbl_user" runat="server" Text='<%# Eval("Feedback_message") %>'></asp:Label>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Admin Reply (Only rendered when Feedback_reply is not empty) -->
-                                            <div class="bubble-flex-row flex-admin-left" runat="server" visible='<%# !string.IsNullOrEmpty(Eval("Feedback_reply") as string) %>'>
-                                                <div class="chat-message-bubble bubble-admin-card">
-                                                    <div class="bubble-sender-title">
-                                                        <asp:Label ID="lbl_you0" runat="server">Admin Support</asp:Label>
-                                                    </div>
-                                                    <div>
-                                                        <asp:Label ID="lbl_admin" runat="server"
-                                                            Text='<%# Eval("Feedback_reply") %>'></asp:Label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </ItemTemplate>
-                                </asp:DataList>
-                            </div>
-
-                            <!-- Chat Input Footer Bar -->
-                            <div class="chat-footer-bar">
-                                <div class="input-pill-container">
-                                    <asp:TextBox ID="tb_msg" runat="server" CssClass="chat-text-box" placeholder="Type your message here..."></asp:TextBox>
-                                    <asp:Button ID="btn_send" runat="server" OnClick="btn_send_Click" Text="Send" CssClass="btn-send-message" ValidationGroup="ChatValidation" UseSubmitBehavior="false" />
-                                </div>
-                                <asp:RequiredFieldValidator ID="rfv_msg" runat="server" ControlToValidate="tb_msg" ErrorMessage="Please enter a message." ForeColor="#ef4444" Display="Dynamic" ValidationGroup="ChatValidation" Style="font-size: 12px; font-weight: 600; margin-top: 6px; display: block; padding-left: 10px;"></asp:RequiredFieldValidator>
-                                <asp:HiddenField ID="hf_ordergroupid" runat="server" />
-                            </div>
-
-                        </div>
+                        </asp:Label>
                     </asp:Panel>
 
                 </div>
             </div>
 
+            <!-- Support / Live Chat Modal -->
+            <asp:Panel ID="Panel1" runat="server" CssClass="chat-drawer-overlay" Visible="False">
+                <div class="chat-drawer-card">
+                    <!-- Drawer Header -->
+                    <div class="chat-drawer-header">
+                        <div>
+                            <h5 class="chat-header-title">Order Support</h5>
+                            <asp:Label ID="lbl_welcome" runat="server" CssClass="chat-header-sub"></asp:Label>
+                        </div>
+                        <asp:Button ID="btn_close" runat="server" OnClick="btn_close_click" Text="Close" CssClass="chat-drawer-close" />
+                    </div>
+
+                    <!-- Chat Body Stream -->
+                    <div class="chat-drawer-body" id="chatStreamBody">
+                        <asp:DataList ID="DL_chat" runat="server" RepeatLayout="Flow" CssClass="dl-reset-table">
+                            <ItemTemplate>
+                                <!-- User Message -->
+                                <%# !string.IsNullOrEmpty(Convert.ToString(Eval("Feedback_message"))) ? @"
+                                <div class='chat-msg-row chat-msg-right'>
+                                    <div class='chat-bubble bubble-user'>" + Eval("Feedback_message") + @"</div>
+                                </div>" : "" %>
+
+                                <!-- Admin Reply Message -->
+                                <%# !string.IsNullOrEmpty(Convert.ToString(Eval("Feedback_reply"))) ? @"
+                                <div class='chat-msg-row chat-msg-left'>
+                                    <div class='chat-bubble bubble-admin'>" + Eval("Feedback_reply") + @"</div>
+                                </div>" : "" %>
+                            </ItemTemplate>
+                        </asp:DataList>
+                    </div>
+
+                    <!-- Chat Footer -->
+                    <div class="chat-drawer-footer">
+                        <div class="chat-input-wrap">
+                            <asp:TextBox ID="tb_msg" runat="server" CssClass="chat-input-field" placeholder="Write a message..." ValidationGroup="ChatValidation"></asp:TextBox>
+                            <asp:Button ID="btn_send" runat="server" OnClick="btn_send_Click" Text="Send" CssClass="btn-chat-submit" ValidationGroup="ChatValidation" UseSubmitBehavior="false" />
+                        </div>
+                        <asp:RequiredFieldValidator ID="rfv_msg" runat="server" ControlToValidate="tb_msg" ValidationGroup="ChatValidation" ErrorMessage="Please enter a message before sending." Display="Dynamic" CssClass="chat-validation-msg" ForeColor="#EF4444"></asp:RequiredFieldValidator>
+                        <asp:HiddenField ID="hf_ordergroupid" runat="server" />
+                    </div>
+                </div>
+            </asp:Panel>
+
         </ContentTemplate>
     </asp:UpdatePanel>
 
     <script type="text/javascript">
-        function scrollChatToBottom() {
-            var chatBody = document.querySelector('.chat-stream-body');
+        function scrollToChatBottom() {
+            var chatBody = document.getElementById("chatStreamBody");
             if (chatBody) {
                 chatBody.scrollTop = chatBody.scrollHeight;
             }
         }
 
-        document.addEventListener("DOMContentLoaded", function () {
-            scrollChatToBottom();
-            var msgLabel = document.getElementById("<%= lbl_msg.ClientID %>");
-            if (msgLabel && msgLabel.innerText.trim() !== "") {
-                var container = document.getElementById("empty-state-wrapper");
-                if (container) {
-                    var msgText = msgLabel.innerText;
-                    container.innerHTML = `
-                        <div class="empty-state-card">
-                            <div class="empty-icon-orb">
-                                <i class="fa fa-shopping-bag"></i>
-                            </div>
-                            <h3 class="empty-state-heading">No Orders Yet</h3>
-                            <p class="empty-state-sub">${msgText}</p>
-                            <a href="Product.aspx" class="btn-explore-catalog">
-                                <i class="fa fa-shopping-cart"></i> Start Shopping
-                            </a>
-                        </div>
-                    `;
-                }
-            }
-        });
-
-        if (typeof Sys !== 'undefined' && Sys.WebForms && Sys.WebForms.PageRequestManager) {
-            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
-                scrollChatToBottom();
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        if (prm) {
+            prm.add_endRequest(function () {
+                scrollToChatBottom();
             });
         }
     </script>
