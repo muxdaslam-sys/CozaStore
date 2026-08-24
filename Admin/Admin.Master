@@ -73,6 +73,12 @@
                             <span class="nav-label">Products</span>
                         </a>
                     </li>
+                    <li id="nav-orders">
+                        <a href="Orders.aspx">
+                            <span class="nav-icon si-green"><i class="fa-solid fa-box"></i></span>
+                            <span class="nav-label">Orders</span>
+                        </a>
+                    </li>
                 </ul>
 
                 <div class="sidebar-label" style="margin-top:8px;">Management</div>

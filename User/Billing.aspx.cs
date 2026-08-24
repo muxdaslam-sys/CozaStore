@@ -61,10 +61,9 @@ namespace Ecom_Project.User
 
             int uid = Convert.ToInt32(Session["uid"]);
             SqlCommand billcmd = new SqlCommand();
-            billcmd.CommandText = @"select p.Product_image,p.Product_name,o.Quantity,o.SubTotal 
-                                            from Order_tab as o 
-                                            join Product_tab p ON o.Product_id = p.Product_id
-                                            WHERE User_id = @uid AND Order_status='Paid' AND o.OrderGroupID=@groupid";
+            billcmd.CommandText = @"select p.Product_image,p.Product_name,p.Product_price,o.Quantity,o.SubTotal 
+                                            from Order_tab as o INNER JOIN Product_tab as p ON o.Product_id = p.Product_id 
+                                            WHERE o.User_id = @uid AND o.Order_status = 'Paid' AND o.OrderGroupID = @groupid";
             billcmd.Parameters.AddWithValue("@uid", uid);
             billcmd.Parameters.AddWithValue("@groupid", orderGroupID);
             DataSet ds = ob.SP_Adapter(billcmd);
