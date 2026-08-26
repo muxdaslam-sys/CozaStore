@@ -46,7 +46,6 @@
 CozaStore/
 ├── Admin/                     # Admin panel ASPX pages & Master page
 ├── User/                      # User storefront ASPX pages & Master page
-├── DB-Backup/                 # Database backup file (CozaStore_DB)
 ├── Images/                    # Product & UI images
 ├── css/                       # Stylesheets & Bootstrap
 ├── js/                        # JavaScript & interactive modules
