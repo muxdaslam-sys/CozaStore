@@ -23,8 +23,7 @@ obj/
 # Visual Studio 2015/2017/2019/2022 cache/options directory
 .vs/
 
-# Database backups or auto-generated database files
-DB-Backup/
+# Database files
 *.bak
 *.mdf
 *.ldf
